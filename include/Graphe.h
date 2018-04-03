@@ -22,8 +22,8 @@ class Graphe
     protected:
 
     private:
-        vector<Sommet*> m_sommets;;
-        vector<Arete*> m_aretes
+        vector<Sommet*> m_sommets;
+        vector<Arete*> m_aretes;
 };
 
 #endif // GRAPHE_H
