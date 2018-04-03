@@ -4,7 +4,6 @@ Sommet::Sommet()
 {
       //ctor
 }
-
 Sommet::Sommet(string nom, float taille)
 {
     m_nom = nom;
