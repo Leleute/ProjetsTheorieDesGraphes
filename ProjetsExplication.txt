@@ -25,4 +25,4 @@ https://en.wikipedia.org/wiki/Population_dynamics#Discrete_time_logistical_model
 via population a l'instant t, r rythme de croissance, K portage de l'environnement
 Concept de regulation
 Voir ca en temps et en heure
-- Modifier la valeur
+- Modifier les valeur
