@@ -9,6 +9,7 @@ class Sommet
 {
       public:
             Sommet();
+            Sommet(string nom, float taille);
             virtual ~Sommet();
 
             string Getnom() { return m_nom; }
