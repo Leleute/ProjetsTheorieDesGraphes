@@ -1,8 +1,9 @@
 #include <iostream>
+#include "GraphList.h"
 
 using namespace std;
 int main()
 {
-    cout << "Hello world!" << endl;
-    return 0;
+    GraphList* test = new GraphList;
+    test->AffichageGraphe();
 }

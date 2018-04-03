@@ -1,4 +1,11 @@
 
 ProjetsS4.depend
 ProjetsS4.depend
+<<<<<<< HEAD
+=======
+bin/Debug/ProjetsS4.exe
+obj/Debug/main.o
+obj/Debug/src/Arete.o
+obj/Debug/main.o
+>>>>>>> 915dc1c49134bb13dae4c2bf5d408c936c49855b
 ProjetsS4.depend
