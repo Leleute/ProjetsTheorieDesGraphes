@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Sommet.h"
-using namespace std;
 
 
 class Arete
@@ -14,9 +13,9 @@ class Arete
             virtual ~Arete();
 
             Sommet Gets1() { return m_s1; }
-            void Sets1(Sommet val) { m_s1 = val; }
+            void Sets1(Sommet* val);
             Sommet Gets2() { return m_s2; }
-            void Sets2(Sommet val) { m_s2 = val; }
+            void Sets2(Sommet* val);
             float Getpoids() { return m_poids; }
             void Setpoids(float val) { m_poids = val; }
 

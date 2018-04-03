@@ -29,9 +29,17 @@ GraphList::~GraphList()
     //dtor
 }
 
+void GraphList::Setmatriceajd()
+{
+    for(unsigned int i = 0; i<m_graphes.size(); i++)
+    {
+        m_graphes[i].Setmatriceadja();
+    }
+}
+
 void GraphList::AffichageGraphe()
 {
-    for(int i=0;i<m_listnoms.size();i++)
+    for(int i=0; i<m_listnoms.size(); i++)
     {
         cout<<"Graphe numero "<<i+1<<endl;
         cout<<this->Getgraphes()[i].Getnom()<<endl;

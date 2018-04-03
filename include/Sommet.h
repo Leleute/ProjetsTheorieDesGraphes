@@ -18,8 +18,15 @@ class Sommet
             void Settaille(int val) { m_taille = val; }
             bool Getactif() { return m_actif; }
             void Setactif(bool val) { m_actif = val; }
-            vector<string> Getcouleur() { return m_couleur; }
-            void Setcouleur(vector<string> val) { m_couleur = val; }
+
+            vector<int> Getcouleur() { return m_couleur; }
+            void Setcouleur(int val) { m_couleur.push_back(val); }
+
+            int Getindice() { return m_indice; }
+            void Setindice(int val) { m_indice = val;}
+
+            bool Getmarque() { return m_marque; }
+            bool Setmarque(bool val) {m_marque = val;}
 
       protected:
 
@@ -27,7 +34,10 @@ class Sommet
             string m_nom;
             int m_taille;
             bool m_actif;
-            vector<string> m_couleur;
+            vector<int> m_couleur;
+            int m_indice;
+
+            bool m_marque;
 };
 
 #endif // SOMMET_H

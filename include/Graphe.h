@@ -5,7 +5,6 @@
 #include "Arete.h"
 #include "Graphe.h"
 #include"fstream"
-//Copie
 
 class Graphe
 {
@@ -27,6 +26,17 @@ class Graphe
 
         int Getnbarete() { return m_nbaretes; }
         void Setnbarete(int val) {m_nbaretes = val;}
+
+        vector<int> Getmatriceadja() { return m_matriceadja; }
+        void Setmatriceadja();
+        void AfficherMatriceAdj();
+        void ForteConnexite();
+
+        void MiseEnPlaceMatriceAdj(vector<int> test);
+
+        void Initialisation();
+
+        vector<int> m_matriceadja;
 
     protected:
 
