@@ -1,0 +1,6 @@
+7
+4
+Sommet1  100 Sommet2 10 3
+Sommet2 10 Sommet3 3 8
+Sommet5 5 Sommet7 4 9
+Sommet6 6 Sommet10 5 4
