@@ -38,9 +38,11 @@
 			<Add library="alleg44.dll" />
 		</Linker>
 		<Unit filename="include/Arete.h" />
+		<Unit filename="include/Graphe.h" />
 		<Unit filename="include/Sommet.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Arete.cpp" />
+		<Unit filename="src/Graphe.cpp" />
 		<Unit filename="src/Sommet.cpp" />
 		<Extensions>
 			<code_completion />
