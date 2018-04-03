@@ -1,6 +1,10 @@
 7
-4
-Sommet1  100 Sommet2 10 3
-Sommet2 10 Sommet3 3 8
-Sommet5 5 Sommet7 4 9
-Sommet6 6 Sommet10 5 4
+8
+arbre 1 nutella 1 1
+poisson 1 oiseau 1 1
+nutella 1 zoe 1 1
+arbre 1 florian 1 1
+jambon 1 florian 1 1
+oiseau 1 zoe 1 1
+florian 1 zoe 1 1
+zoe 1 arbre 1 1

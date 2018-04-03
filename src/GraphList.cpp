@@ -44,8 +44,8 @@ void GraphList::AffichageGraphe()
             cout<<m_graphes[i].Getaretes()[j].Gets2().Gettaille()<<endl;
             cout<<m_graphes[i].Getaretes()[j].Getpoids()<<endl;
             cout<<endl;
-
         }
+        cout<<m_graphes[i].Getsommets().size()<<endl<<endl;
     }
 }
 
