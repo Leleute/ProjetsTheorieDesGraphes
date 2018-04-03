@@ -1,5 +1,0 @@
-4
-3
-Salade 100 Tortue 10 10
-Salade 100 Insecte 10 5
-Insecte 10 Papillons 10 10
