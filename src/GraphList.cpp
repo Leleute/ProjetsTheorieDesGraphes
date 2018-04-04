@@ -17,9 +17,33 @@ GraphList::GraphList()
             m_graphes.push_back(graph);
         }
         fp.close();
+        string nomgraph;
+        bool valide = false;
+        while(!valide)
+        {
+            cout<<"Quel graph voulez vous voir actif en premier ?"<<endl;
+            for(unsigned int i = 0; i<m_graphes.size(); i++)
+            {
+                cout<<m_graphes[i].Getnom()<<endl;
+            }
+            cin>>nomgraph;
+            for(unsigned int i = 0; i<m_graphes.size(); i++)
+            {
+                if(nomgraph == m_graphes[i].Getnom())
+                {
+                    m_graphes[i].Setactif(true);
+                    valide = true;
+                }
+                else if(nomgraph != m_graphes[i].Getnom())
+                {
+                    m_graphes[i].Setactif(false);
+                }
+            }
+        }
     }
     else if(!fp)
     {
+        cout<<"Erreur"<<endl;
     }
 }
 
@@ -27,6 +51,17 @@ GraphList::GraphList()
 GraphList::~GraphList()
 {
     //dtor
+}
+
+void GraphList::SupprimerSommet()
+{
+    for(unsigned int i = 0; i<m_graphes.size(); i++)
+    {
+        if(m_graphes[i].Getactif() == true )
+        {
+            m_graphes[i].SupprimerSommet();
+        }
+    }
 }
 
 void GraphList::Setmatriceajd()
@@ -63,6 +98,24 @@ void GraphList::AffichageGraphe()
         }
         cout<<m_graphes[i].Getsommets().size()<<endl<<endl;
     }
+}
+
+void GraphList::SauvegarderFichier()
+{
+    ofstream fp {("GrapheList.txt"), ios::out};
+    if (fp)
+    {
+        for(unsigned int i = 0; i<m_graphes.size(); i++)
+        {
+            fp<<m_graphes[i].Getnom()<<endl;
+            m_graphes[i].SauvegarderGraphe();
+        }
+    }
+    else
+    {
+        cout<<"Erreur"<<endl;
+    }
+
 }
 
 

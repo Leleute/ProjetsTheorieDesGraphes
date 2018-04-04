@@ -17,6 +17,8 @@ class GraphList
         void AffichageGraphe();
         void Setmatriceajd();
         void Setforteconnexite();
+        void SauvegarderFichier();
+        void SupprimerSommet();
     protected:
 
     private:

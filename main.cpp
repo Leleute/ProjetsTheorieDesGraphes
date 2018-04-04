@@ -6,10 +6,11 @@ int main()
 {
     GraphList* test = new GraphList;
     test->Setmatriceajd();
-    test->Getgraphes()[0].AfficherMatriceAdj();
-    test->Setforteconnexite();
-    test->Getgraphes()[0].AfficherForteConnexite();
-
+    test->Getgraphes().front().AfficherMatriceAdj();
+    test->SupprimerSommet();
+    test->Setmatriceajd();
+    test->Getgraphes().front().AfficherMatriceAdj();
+    test->SauvegarderFichier();
 }
 
  // ok

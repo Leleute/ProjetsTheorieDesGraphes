@@ -59,6 +59,9 @@ Graphe::Graphe(string nomfichier)
 
 void Graphe::Initialisation()
 {
+    ///On met a jour le nombre d'arete et de sommet
+    m_nbaretes = m_aretes.size();
+    m_ordre = m_sommets.size();
     ///On initialise les indices des sommeet
     for(unsigned int i = 0; i<m_ordre; i++)
     {
@@ -89,7 +92,12 @@ Graphe::~Graphe()
 ///A revoir
 void Graphe::Setmatriceadja()
 {
-    vector<int> sav;
+    ///On reinitialise la matrice
+    while(m_matriceadja.size() != 0)
+    {
+        m_matriceadja.pop_back();
+    }
+    cout<<"ordre : "<<m_ordre<<endl;
     for(unsigned int i= 0; i<m_ordre*m_ordre; i++)
     {
 
@@ -237,5 +245,58 @@ void Graphe::AfficherForteConnexite()
             cout<<m_sommets[i].Getcouleur()[j]<<endl;
         }
         cout<<endl;
+    }
+}
+
+void Graphe::SauvegarderGraphe()
+{
+    ofstream fp {(m_nom+".txt").c_str(), ios::out};
+    if (fp)
+    {
+        fp<<m_ordre<<endl;
+        fp<<m_nbaretes<<endl;
+        for(unsigned int i = 0; i<m_nbaretes; i++)
+        {
+            fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Getpoids()<<endl;
+        }
+    }
+    else
+    {
+        cout<<"Erreur"<<endl;
+    }
+}
+
+void Graphe::SupprimerSommet()
+{
+    string sommetsupr;
+    bool suprvalide;
+    vector<Arete> newArete;
+    vector<Sommet> newSommet;
+    cout<<"Veuillez nommer le sommet a supprimer"<<endl;
+    cin>>sommetsupr;
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        if(sommetsupr == m_sommets[i].Getnom()) suprvalide = true;
+    }
+    if(suprvalide == true)
+    {
+        ///Pour les sommets
+        for(unsigned int i = 0; i<m_sommets.size(); i++)
+        {
+            ///On ajoute tous les sommets sauf celui a supprimer
+            if(sommetsupr != m_sommets[i].Getnom()) newSommet.push_back(m_sommets[i]);
+        }
+        ///On met a jour les sommets
+        m_sommets = newSommet;
+
+        for(unsigned int i = 0; i<m_aretes.size(); i++)
+        {
+            if(m_aretes[i].Gets1().Getnom() != sommetsupr && m_aretes[i].Gets2().Getnom() != sommetsupr) newArete.push_back(m_aretes[i]);
+        }
+
+        m_aretes = newArete;
+
+        ///On reinitiallise le graphe
+        Initialisation();
     }
 }

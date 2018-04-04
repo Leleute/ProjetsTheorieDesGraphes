@@ -19,6 +19,9 @@ class Graphe
         vector<Arete> Getaretes() { return m_aretes; }
         void Setarete(vector<Arete> val) { m_aretes = val; }
 
+        bool Getactif() { return m_actif; }
+        void Setactif(bool val) { m_actif = val;}
+
         string Getnom() { return m_nom; }
 
         int Getordre() { return m_ordre; }
@@ -33,6 +36,9 @@ class Graphe
         void ForteConnexite();
         void AfficherForteConnexite();
 
+        void SauvegarderGraphe();
+        void SupprimerSommet();
+
         void MiseEnPlaceMatriceAdj(vector<int> test);
 
         void Initialisation();
@@ -46,6 +52,7 @@ class Graphe
         int m_nbaretes;
         string m_nom;
         vector<int> m_matriceadja;
+        bool m_actif;
 };
 
 #endif // GRAPHE_H
