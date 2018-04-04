@@ -37,6 +37,14 @@ void GraphList::Setmatriceajd()
     }
 }
 
+void GraphList::Setforteconnexite()
+{
+    for(unsigned int i = 0; i<m_graphes.size(); i++)
+    {
+        m_graphes[i].ForteConnexite();
+    }
+}
+
 void GraphList::AffichageGraphe()
 {
     for(int i=0; i<m_listnoms.size(); i++)

@@ -5,7 +5,11 @@ using namespace std;
 int main()
 {
     GraphList* test = new GraphList;
-   //test->Getgraphes()[0].AfficherMatriceAdj();
-   test->Getgraphes()[0].ForteConnexite();
+    test->Setmatriceajd();
+    test->Getgraphes()[0].AfficherMatriceAdj();
+    test->Setforteconnexite();
+    test->Getgraphes()[0].AfficherForteConnexite();
+
 }
+
  // ok

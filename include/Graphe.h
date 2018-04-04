@@ -31,12 +31,11 @@ class Graphe
         void Setmatriceadja();
         void AfficherMatriceAdj();
         void ForteConnexite();
+        void AfficherForteConnexite();
 
         void MiseEnPlaceMatriceAdj(vector<int> test);
 
         void Initialisation();
-
-        vector<int> m_matriceadja;
 
     protected:
 
@@ -46,6 +45,7 @@ class Graphe
         int m_ordre;
         int m_nbaretes;
         string m_nom;
+        vector<int> m_matriceadja;
 };
 
 #endif // GRAPHE_H

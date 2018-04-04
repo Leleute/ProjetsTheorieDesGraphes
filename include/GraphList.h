@@ -16,6 +16,7 @@ class GraphList
         void Setgraphes(vector<Graphe> val) { m_graphes = val; }
         void AffichageGraphe();
         void Setmatriceajd();
+        void Setforteconnexite();
     protected:
 
     private:

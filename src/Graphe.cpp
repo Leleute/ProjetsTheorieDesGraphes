@@ -54,31 +54,7 @@ Graphe::Graphe(string nomfichier)
             m_aretes.push_back(arete);
         }
         Initialisation();
-
-        vector<int> sav;
-        for(unsigned int i= 0; i<m_ordre*m_ordre; i++)
-        {
-
-            m_matriceadja.push_back(0);
-        }
-
-        for(unsigned int i = 0; i<m_ordre; i++)
-        {
-            for(unsigned int j = 0; j<m_ordre; j++)
-            {
-                for(unsigned int k = 0; k<m_aretes.size(); k++)
-                {
-                    if(m_sommets[i].Getnom() == m_aretes[k].Gets1().Getnom() && m_sommets[j].Getnom() == m_aretes[k].Gets2().Getnom())
-                    {
-                        m_matriceadja[(i + j*m_ordre)] = m_aretes[k].Getpoids();
-                    }
-                }
-
-            }
-        }
     }
-
-
 }
 
 void Graphe::Initialisation()
@@ -117,7 +93,7 @@ void Graphe::Setmatriceadja()
     for(unsigned int i= 0; i<m_ordre*m_ordre; i++)
     {
 
-        sav.push_back(0);
+        m_matriceadja.push_back(0);
     }
 
     for(unsigned int i = 0; i<m_ordre; i++)
@@ -128,24 +104,14 @@ void Graphe::Setmatriceadja()
             {
                 if(m_sommets[i].Getnom() == m_aretes[k].Gets1().Getnom() && m_sommets[j].Getnom() == m_aretes[k].Gets2().Getnom())
                 {
-                    sav[(i + j*m_ordre)] = m_aretes[k].Getpoids();
+                    m_matriceadja[(i + j*m_ordre)] = m_aretes[k].Getpoids();
                 }
             }
 
         }
     }
-    MiseEnPlaceMatriceAdj(sav);
 }
 
-void Graphe::MiseEnPlaceMatriceAdj(vector<int> test)
-{
-    vector<int> save;
-    for(unsigned int i = 0; i<test.size(); i++)
-    {
-
-    }
-
-}
 
 void Graphe::AfficherMatriceAdj()
 {
@@ -260,7 +226,10 @@ void Graphe::ForteConnexite()
             }
         }
     }
+}
 
+void Graphe::AfficherForteConnexite()
+{
     for(unsigned int i = 0; i<m_ordre; i++)
     {
         for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
@@ -269,5 +238,4 @@ void Graphe::ForteConnexite()
         }
         cout<<endl;
     }
-
 }
