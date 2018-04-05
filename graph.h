@@ -160,6 +160,9 @@ private :
     bool m_marque;
 
     ///   BITMAP* m_image; // Pas besoin ?
+
+    int m_degre;
+    int m_predecesseur;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public:
 
@@ -177,60 +180,23 @@ public:
      // Vertex(){}; ///
     Vertex(std::string nom, float taille, VertexInterface *interface=nullptr) :
         m_nom(nom), m_actif(true), m_taille(taille),m_interface(interface) {} ///
-
     virtual ~Vertex() {};
-
-    std::string Getnom()
-    {
-        return m_nom;
-    }
-    void Setnom(std::string val)
-    {
-        m_nom = val;
-    }
-    int Gettaille()
-    {
-        return m_taille;
-    }
-    void Settaille(int val)
-    {
-        m_taille = val;
-    }
-    bool Getactif()
-    {
-        return m_actif;
-    }
-    void Setactif(bool val)
-    {
-        m_actif = val;
-    }
-
-    std::vector<int> Getcouleur()
-    {
-        return m_couleur;
-    }
-    void Setcouleur(int val)
-    {
-        m_couleur.push_back(val);
-    }
-
-    int Getindice()
-    {
-        return m_indice;
-    }
-    void Setindice(int val)
-    {
-        m_indice = val;
-    }
-
-    bool Getmarque()
-    {
-        return m_marque;
-    }
-    bool Setmarque(bool val)
-    {
-        m_marque = val;
-    }
+    std::string Getnom(){return m_nom;}
+    void Setnom(std::string val){m_nom = val;}
+    int Gettaille(){return m_taille;}
+    void Settaille(int val){m_taille = val;}
+    bool Getactif(){return m_actif;}
+    void Setactif(bool val){m_actif = val;}
+    std::vector<int> Getcouleur(){return m_couleur;}
+    void Setcouleur(int val){m_couleur.push_back(val);}
+    int Getindice(){return m_indice;}
+    void Setindice(int val){m_indice = val;}
+    bool Getmarque(){return m_marque;}
+    bool Setmarque(bool val){m_marque = val;}
+    int Getdegre() { return m_degre; }
+    void Setdegre(int val) { m_degre = val; }
+    int Getprede() { return m_predecesseur; }
+    void Setprede(int val) { m_predecesseur = val; }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 };
 
@@ -299,6 +265,10 @@ private :
     float m_poids;
 
     BITMAP* m_image;
+
+
+    int m_indice;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public:
@@ -324,26 +294,18 @@ public:
         m_poids=val;
     }
 
+
      //    virtual ~Edge(){};
 
-    Vertex Gets1()
-    {
-        return m_s1;
-    }
-    void Sets1(Vertex* val);
-    Vertex Gets2()
-    {
-        return m_s2;
-    }
-    void Sets2(Vertex* val);
-    float Getpoids()
-    {
-        return m_poids;
-    }
-    void Setpoids(float val)
-    {
-        m_poids = val;
-    }
+    Vertex Gets1(){return m_s1;}
+    Vertex Gets2(){return m_s2;}
+    float Getpoids(){return m_poids;}
+    void Setpoids(float val){m_poids = val;}
+    int Getindice() {return m_indice; }
+    void Setindice(int val){m_indice = val; }
+    void Sets1(Vertex* val){m_s1 = *val;}
+    void Sets2(Vertex* val){m_s2 = *val;}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 };
 
@@ -398,13 +360,14 @@ private :
     /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
     std::shared_ptr<GraphInterface> m_interface = nullptr;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   std::vector<Vertex> m_sommets;
+    std::vector<Vertex> m_sommets;
     std::vector<Edge> m_aretes;
     int m_ordre;
     int m_nbaretes;
     std::string m_nom;
     std::vector<int> m_matriceadja;
     bool m_actif;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public:
 
@@ -422,74 +385,39 @@ public:
     /// de chargement de fichiers par exemple.
     void make_example();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Graph(std::string nomfichier);
+    Graph(std::string nomfichier);
     virtual ~Graph(){};
 
-    std::vector<Vertex> Getsommets()
-    {
-        return m_sommets;
-    }
-    void Setsommets(std::vector<Vertex> val)
-    {
-        m_sommets = val;
-    }
-
-    std::vector<Edge> Getaretes()
-    {
-        return m_aretes;
-    }
-    void Setarete(std::vector<Edge> val)
-    {
-        m_aretes = val;
-    }
-
-    bool Getactif()
-    {
-        return m_actif;
-    }
-    void Setactif(bool val)
-    {
-        m_actif = val;
-    }
-
-    std::string Getnom()
-    {
-        return m_nom;
-    }
-
-    int Getordre()
-    {
-        return m_ordre;
-    }
-    void Setordre(int val)
-    {
-        m_ordre = val;
-    }
-
-    int Getnbarete()
-    {
-        return m_nbaretes;
-    }
-    void Setnbarete(int val)
-    {
-        m_nbaretes = val;
-    }
-
-    std::vector<int> Getmatriceadja()
-    {
-        return m_matriceadja;
-    }
+    std::vector<Vertex> Getsommets(){return m_sommets;}
+    void Setsommets(std::vector<Vertex> val){m_sommets = val;}
+    std::vector<Edge> Getaretes(){return m_aretes;}
+    void Setarete(std::vector<Edge> val){m_aretes = val;}
+    bool Getactif(){return m_actif;}
+    void Setactif(bool val){m_actif = val;}
+    std::string Getnom(){return m_nom;}
+    int Getordre(){return m_ordre;}
+    void Setordre(int val){m_ordre = val;}
+    int Getnbarete(){return m_nbaretes;}
+    void Setnbarete(int val){m_nbaretes = val;}
+    std::vector<int> Getmatriceadja(){return m_matriceadja;}
     void Setmatriceadja();
     void AfficherMatriceAdj();
     void ForteConnexite();
     void AfficherForteConnexite();
-
     void SauvegarderGraphe();
-    void SupprimerSommet();
-
     void MiseEnPlaceMatriceAdj(std::vector<int> test);
-
     void Initialisation();
+    void SupprimerSommet(std::string sommet);
+
+        void SupprimerArete(int arete);
+        int BFSSuppression(int indice1, int indice2);
+
+        bool IsConnexe();
+
+        void KconnexiteArete();
+
+        void MapVertex();
+        void MapEdge();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
