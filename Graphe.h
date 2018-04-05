@@ -5,6 +5,7 @@
 #include "Arete.h"
 #include "Graphe.h"
 #include"fstream"
+#include <map>
 
 class Graphe
 {
@@ -37,15 +38,25 @@ class Graphe
         void AfficherForteConnexite();
 
         void SauvegarderGraphe();
-        void SupprimerSommet();
+        void SupprimerSommet(string sommet);
+        void SupprimerArete(int arete);
+        int BFSSuppression(int indice1, int indice2);
+
+        bool IsConnexe();
 
         void MiseEnPlaceMatriceAdj(vector<int> test);
 
         void Initialisation();
+        void KconnexiteArete();
+
+        void MapVertex();
+        void MapEdge();
 
     protected:
 
     private:
+        map<int , Arete> m_edge;
+        map<int, Sommet> m_vertex;
         vector<Sommet> m_sommets;
         vector<Arete> m_aretes;
         int m_ordre;
