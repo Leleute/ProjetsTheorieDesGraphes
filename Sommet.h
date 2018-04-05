@@ -29,6 +29,12 @@ class Sommet
             bool Getmarque() { return m_marque; }
             bool Setmarque(bool val) {m_marque = val;}
 
+            int Getdegre() { return m_degre; }
+            void Setdegre(int val) { m_degre = val; }
+
+            int Getprede() { return m_predecesseur; }
+            void Setprede(int val) { m_predecesseur = val; }
+
       protected:
 
       private:
@@ -37,8 +43,9 @@ class Sommet
             bool m_actif;
             vector<int> m_couleur;
             int m_indice;
-
+            int m_degre;
             bool m_marque;
+            int m_predecesseur;
 
             BITMAP* m_image;
 };

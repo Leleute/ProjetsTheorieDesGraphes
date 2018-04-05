@@ -18,7 +18,7 @@ Arete::~Arete()
 {
       //dtor
 }
-
+/*
 void Arete::Sets1(Sommet* val)
 {
     m_s1.Setnom(val->Getnom());
@@ -31,5 +31,5 @@ void Arete::Sets2(Sommet* val)
     m_s2.Setnom(val->Getnom());
     m_s2.Setmarque(val->Getmarque());
     m_s2.Setindice(val->Getindice());
-}
+}*/
 

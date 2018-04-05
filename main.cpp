@@ -32,12 +32,7 @@ int main()
     grman::fermer_allegro();
 */
   GraphList* test = new GraphList;
-    test->Setmatriceajd();
-    test->Getgraphes().front().AfficherMatriceAdj();
-    test->SupprimerSommet();
-    test->Setmatriceajd();
-    test->Getgraphes().front().AfficherMatriceAdj();
-    test->SauvegarderFichier();
+  test->Getgraphes().front().KconnexiteArete();
 
     return 0;
 }

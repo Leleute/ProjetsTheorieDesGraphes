@@ -14,11 +14,14 @@ class Arete
             virtual ~Arete();
 
             Sommet Gets1() { return m_s1; }
-            void Sets1(Sommet* val);
+            void Sets1(Sommet* val){m_s1 = *val;}
             Sommet Gets2() { return m_s2; }
-            void Sets2(Sommet* val);
+            void Sets2(Sommet* val){m_s2 = *val;}
             float Getpoids() { return m_poids; }
             void Setpoids(float val) { m_poids = val; }
+
+            int Getindice() {return m_indice; }
+            void Setindice(int val){m_indice = val; }
 
       protected:
 
@@ -26,6 +29,8 @@ class Arete
             Sommet m_s1;
             Sommet m_s2;
             float m_poids;
+
+            int m_indice;
 
             BITMAP* m_image;
 };
