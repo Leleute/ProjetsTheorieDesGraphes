@@ -147,40 +147,44 @@
 1522869057 source:c:\users\ghias\desktop\projetecologique\arete.cpp
 	"Arete.h"
 
-1522871403 c:\users\ghias\desktop\projetecologique\arete.h
+1522933436 c:\users\ghias\desktop\projetecologique\arete.h
 	<iostream>
 	<vector>
 	"Sommet.h"
 	<allegro.h>
 
-1522871403 c:\users\ghias\desktop\projetecologique\sommet.h
+1522933436 c:\users\ghias\desktop\projetecologique\sommet.h
 	<iostream>
 	<vector>
 	<allegro.h>
 
-1522873486 source:c:\users\ghias\desktop\projetecologique\graph.cpp
+1522937952 source:c:\users\ghias\desktop\projetecologique\graph.cpp
 	"graph.h"
+	<queue>
+	"fstream"
 
-1522656089 c:\users\ghias\desktop\projetecologique\graph.h
+1522937479 c:\users\ghias\desktop\projetecologique\graph.h
+	<iostream>
+	<map>
 	<vector>
 	<map>
 	<string>
 	<memory>
 	"grman/grman.h"
 
-1522539041 c:\users\ghias\desktop\projetecologique\grman\grman.h
+1522933436 c:\users\ghias\desktop\projetecologique\grman\grman.h
 	<allegro.h>
 	<string>
 	"grman_couleurs.h"
 	"coords.h"
 	"widget.h"
 
-1509222372 c:\users\ghias\desktop\projetecologique\grman\grman_couleurs.h
+1522933436 c:\users\ghias\desktop\projetecologique\grman\grman_couleurs.h
 
-1522575424 c:\users\ghias\desktop\projetecologique\grman\coords.h
+1522933436 c:\users\ghias\desktop\projetecologique\grman\coords.h
 	<cmath>
 
-1522636616 c:\users\ghias\desktop\projetecologique\grman\widget.h
+1522933436 c:\users\ghias\desktop\projetecologique\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -188,27 +192,28 @@
 	<algorithm>
 	<allegro.h>
 
-1522869057 source:c:\users\ghias\desktop\projetecologique\graphe.cpp
+1522933436 source:c:\users\ghias\desktop\projetecologique\graphe.cpp
 	"Graphe.h"
 	<queue>
 
-1522869057 c:\users\ghias\desktop\projetecologique\graphe.h
+1522933436 c:\users\ghias\desktop\projetecologique\graphe.h
 	<vector>
 	<iostream>
 	"Arete.h"
 	"Graphe.h"
 	"fstream"
 
-1522869057 source:c:\users\ghias\desktop\projetecologique\graphlist.cpp
+1522940124 source:c:\users\ghias\desktop\projetecologique\graphlist.cpp
 	"GraphList.h"
 
-1522869057 c:\users\ghias\desktop\projetecologique\graphlist.h
+1522941465 c:\users\ghias\desktop\projetecologique\graphlist.h
 	"Graphe.h"
+	"graph.h"
 
 1522575069 source:c:\users\ghias\desktop\projetecologique\grman\coords.cpp
 	"coords.h"
 
-1522760006 source:c:\users\ghias\desktop\projetecologique\grman\grman.cpp
+1522933436 source:c:\users\ghias\desktop\projetecologique\grman\grman.cpp
 	<cmath>
 	<unordered_map>
 	<unordered_set>
@@ -222,10 +227,10 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
-1522636919 source:c:\users\ghias\desktop\projetecologique\grman\widget.cpp
+1522933436 source:c:\users\ghias\desktop\projetecologique\grman\widget.cpp
 	"widget.h"
 
-1522917472 source:c:\users\ghias\desktop\projetecologique\main.cpp
+1522933436 source:c:\users\ghias\desktop\projetecologique\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"GraphList.h"
@@ -233,95 +238,4 @@
 
 1522869057 source:c:\users\ghias\desktop\projetecologique\sommet.cpp
 	"Sommet.h"
-
-1522937961 source:c:\users\matth\desktop\projetstheoriedesgraphes\arete.cpp
-	"Arete.h"
-
-1522938102 c:\users\matth\desktop\projetstheoriedesgraphes\arete.h
-	<iostream>
-	<vector>
-	"Sommet.h"
-	<allegro.h>
-
-1522933679 c:\users\matth\desktop\projetstheoriedesgraphes\sommet.h
-	<iostream>
-	<vector>
-	<allegro.h>
-
-1522918589 source:c:\users\matth\desktop\projetstheoriedesgraphes\graph.cpp
-	"graph.h"
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\graph.h
-	<vector>
-	<map>
-	<string>
-	<memory>
-	"grman/grman.h"
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\grman\grman.h
-	<allegro.h>
-	<string>
-	"grman_couleurs.h"
-	"coords.h"
-	"widget.h"
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\grman\grman_couleurs.h
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\grman\coords.h
-	<cmath>
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\grman\widget.h
-	"grman.h"
-	<iostream>
-	<string>
-	<vector>
-	<algorithm>
-	<allegro.h>
-
-1522941486 source:c:\users\matth\desktop\projetstheoriedesgraphes\graphe.cpp
-	"Graphe.h"
-	<queue>
-
-1522938386 c:\users\matth\desktop\projetstheoriedesgraphes\graphe.h
-	<vector>
-	<iostream>
-	"Arete.h"
-	"Graphe.h"
-	"fstream"
-	<map>
-
-1522934299 source:c:\users\matth\desktop\projetstheoriedesgraphes\graphlist.cpp
-	"GraphList.h"
-
-1522918589 c:\users\matth\desktop\projetstheoriedesgraphes\graphlist.h
-	"Graphe.h"
-
-1522918589 source:c:\users\matth\desktop\projetstheoriedesgraphes\grman\coords.cpp
-	"coords.h"
-
-1522918589 source:c:\users\matth\desktop\projetstheoriedesgraphes\grman\grman.cpp
-	<cmath>
-	<unordered_map>
-	<unordered_set>
-	<utility>
-	<string>
-	<iostream>
-	<regex>
-	"grman.h"
-	<allegro.h>
-	<png.h>
-	<loadpng.h>
-	<jpgalleg.h>
-
-1522918589 source:c:\users\matth\desktop\projetstheoriedesgraphes\grman\widget.cpp
-	"widget.h"
-
-1522918589 source:c:\users\matth\desktop\projetstheoriedesgraphes\sommet.cpp
-	"Sommet.h"
-
-1522939173 source:c:\users\matth\desktop\projetstheoriedesgraphes\main.cpp
-	"grman/grman.h"
-	<iostream>
-	"GraphList.h"
-	"graph.h"
 

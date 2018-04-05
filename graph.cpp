@@ -1,6 +1,6 @@
 #include "graph.h"
-
-
+#include <queue>
+#include "fstream"
 /***************************************************
                     VERTEX
 ****************************************************/
@@ -15,7 +15,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     // Le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_value.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_value.set_dim(20,80);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
@@ -82,27 +82,32 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
         std::cerr << "Error creating EdgeInterface between vertices having no interface" << std::endl;
         throw "Bad EdgeInterface instanciation";
     }
-    m_top_edge.attach_from(from.m_interface->m_top_box);
-    m_top_edge.attach_to(to.m_interface->m_top_box);
-    m_top_edge.reset_arrow_with_bullet();
+    m_top_edge.attach_from(from.m_interface->m_top_box); ///Point de départ
+    m_top_edge.attach_to(to.m_interface->m_top_box);              ///Point d'arrivée
+    m_top_edge.reset_arrow_with_bullet();                                           ///la fleche et le point de l'arete
 
     // Une boite pour englober les widgets de réglage associés
+    ///Toute la boîte
     m_top_edge.add_child(m_box_edge);
     m_box_edge.set_dim(24,60);
     m_box_edge.set_bg_color(BLANCBLEU);
 
     // Le slider de réglage de valeur
+    ///=bouton poussoir des box edge
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_weight.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
     // Label de visualisation de valeur
+    ///= le nombre de représentants de l'espece
     m_box_edge.add_child( m_label_weight );
     m_label_weight.set_gravity_y(grman::GravityY::Down);
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Gestion du Edge avant l'appel à l'interface
 void Edge::pre_update()
@@ -163,18 +168,18 @@ void Graph::make_example()
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     // La ligne précédente est en gros équivalente à :
     // m_interface = new GraphInterface(50, 0, 750, 600);
-/*
-    /// Les sommets doivent être définis avant les arcs
-    // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
-    add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
-    add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
-    add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
-    add_interfaced_vertex(4,  100.0, 600, 300, "clown5.jpg");
-    add_interfaced_vertex(5,  0.0, 100, 500, "bad_clowns_xx3xx.jpg", 0);
-    add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
-    add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
-*/
+    /*
+        /// Les sommets doivent être définis avant les arcs
+        // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
+        add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
+        add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
+        add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
+        add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
+        add_interfaced_vertex(4,  100.0, 600, 300, "clown5.jpg");
+        add_interfaced_vertex(5,  0.0, 100, 500, "bad_clowns_xx3xx.jpg", 0);
+        add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
+        add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
+    */
     add_interfaced_vertex(0,1.0f, 150,150,"algue.bmp");
     add_interfaced_vertex(1,1.0f, 150,400,"herbeMarine.bmp");
     add_interfaced_vertex(2,1.0f, 350,50,"crevette.bmp");
@@ -279,4 +284,312 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Graph::Graph(std::string nomfichier)
+{
+std::ifstream fp { (nomfichier+".txt").c_str() };
+    std::string s1, s2;
+    float poids, taille1, taille2;
+    bool valide1 = false;
+    bool valide2 = false;
+    if(fp)
+    {
+        m_nom = nomfichier;
+        fp>>m_ordre;
+        fp>>m_nbaretes;
+        for(unsigned int i = 0; i<m_nbaretes; i++)
+        {
+            fp>>s1;
+            fp>>taille1;
+            fp>>s2;
+            fp>>taille2;
+            fp>>poids;
+
+            for(unsigned int j = 0; j < m_sommets.size(); j++)
+            {
+                if(s1 == m_sommets[j].Getnom())
+                {
+                    valide1 = true;
+                }
+                if(s2 == m_sommets[j].Getnom())
+                {
+                    valide2 = true;
+                }
+            }
+            if(valide1 == false)
+            {
+                Vertex s(s1, taille1);
+                m_sommets.push_back(s);
+            }
+            if(valide2 == false)
+            {
+                Vertex s(s2, taille2);
+                m_sommets.push_back(s);
+            }
+            valide1 = false;
+            valide2 = false;
+
+            Edge arete(s1, taille1, s2,taille2, poids) ;
+            m_aretes.push_back(arete);
+        }
+        Initialisation();
+    }
+}
+
+void Graph::Initialisation()
+{
+    ///On met a jour le nombre d'arete et de sommet
+    m_nbaretes = m_aretes.size();
+    m_ordre = m_sommets.size();
+    ///On initialise les indices des sommeet
+    for(unsigned int i = 0; i<m_ordre; i++)
+    {
+        m_sommets[i].Setindice(i);
+        m_sommets[i].Setmarque(false);
+
+    }
+    ///On mets les sommets des aretes a egalite de ces derniers
+    for(unsigned int i = 0; i<m_aretes.size(); i ++)
+    {
+        for(unsigned int j = 0; j<m_ordre; j++)
+        {
+            if(m_aretes[i].Gets1().Getnom() == m_sommets[j].Getnom())
+                m_aretes[i].Sets1(&m_sommets[j]);
+            if(m_aretes[i].Gets2().Getnom() == m_sommets[j].Getnom())
+                m_aretes[i].Sets2(&m_sommets[j]);
+        }
+    }
+
+
+}
+///A revoir
+void Graph::Setmatriceadja()
+{
+    ///On reinitialise la matrice
+    while(m_matriceadja.size() != 0)
+    {
+        m_matriceadja.pop_back();
+    }
+    std::cout<<"ordre : "<<m_ordre<<std::endl;
+    for(unsigned int i= 0; i<m_ordre*m_ordre; i++)
+    {
+
+        m_matriceadja.push_back(0);
+    }
+
+    for(unsigned int i = 0; i<m_ordre; i++)
+    {
+        for(unsigned int j = 0; j<m_ordre; j++)
+        {
+            for(unsigned int k = 0; k<m_aretes.size(); k++)
+            {
+                if(m_sommets[i].Getnom() == m_aretes[k].Gets1().Getnom() && m_sommets[j].Getnom() == m_aretes[k].Gets2().Getnom())
+                {
+                    m_matriceadja[(i + j*m_ordre)] = m_aretes[k].Getpoids();
+                }
+            }
+
+        }
+    }
+}
+
+
+void Graph::AfficherMatriceAdj()
+{
+    for(unsigned int i = 0 ; i<m_sommets.size(); i++)
+    {
+        std::cout<<m_sommets[i].Getnom()<<std::endl;
+    }
+    for(unsigned int i= 0; i<m_ordre; i++)
+    {
+        for(unsigned int j = 0; j<m_ordre; j++)
+        {
+            std::cout<<m_matriceadja[i + j * m_ordre]<<" ";
+        }
+        std::cout<<std::endl;
+    }
+
+    for(unsigned int i = 0; i<m_ordre; i++)
+    {
+        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Getindice()<<std::endl;
+    }
+}
+
+void Graph::ForteConnexite()
+{
+    std::queue<int> file;
+    ///On initialise les indices des sommets
+    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
+    for(unsigned int i = 0; i<m_ordre; i++)
+    {
+        ///Composantes fortement connexte partant de x (via vecteur d'arrete)
+
+        ///On initialise le marquage a faux
+        Initialisation();
+        ///On ajoute le sommets de debut
+        file.push(i);
+        ///On le marque
+        m_sommets[i].Setmarque(true);
+        ///On crée le vecteur qui va recuperer les arretes utilisés
+        std::vector<Vertex> compoconnexe;
+        while(file.size() != 0)
+        {
+            for(unsigned int j = 0; j<m_aretes.size(); j++)
+            {
+                ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
+                {
+                    ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                    file.push(m_aretes[j].Gets2().Getindice());
+                    ///On le marque
+                    m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
+                }
+            }
+            file.pop();
+        }
+        std::cout<<m_sommets[i].Getnom()<<std::endl;
+        for(unsigned int j = 0; j<m_ordre; j++)
+        {
+            if(m_sommets[j].Getmarque() == true)
+            {
+                ///On recuperer les sommets de la compo connexe dans le sens positif
+                std::cout<<m_sommets[j].Getnom()<<std::endl;
+                compoconnexe.push_back(m_sommets[j]);
+            }
+        }
+        std::cout<<std::endl<<std::endl;
+
+        ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
+
+        ///On initialise le marquage a faux
+        Initialisation();
+        ///On ajoute le sommets de debut
+        file.push(i);
+        ///On le marque
+        m_sommets[i].Setmarque(true);
+        ///On crée le vecteur qui va recuperer les arretes utilisés
+        std::vector<Vertex> compoconnexeinverse;
+        while(file.size() != 0)
+        {
+            for(unsigned int j = 0; j<m_aretes.size(); j++)
+            {
+                ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
+                {
+                    ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                    file.push(m_aretes[j].Gets1().Getindice());
+                    ///On le marque
+                    m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
+                }
+            }
+            file.pop();
+        }
+        std::cout<<m_sommets[i].Getnom()<<std::endl;
+        for(unsigned int j = 0; j<m_ordre; j++)
+        {
+            if(m_sommets[j].Getmarque() == true)
+            {
+                ///On recuperer les sommets de la compo connexe dans le sens positif
+                std::cout<<m_sommets[j].Getnom()<<std::endl;
+                compoconnexeinverse.push_back(m_sommets[j]);
+            }
+        }
+
+        std::cout<<std::endl<<std::endl;
+        for(unsigned int j = 0; j<compoconnexe.size(); j++)
+        {
+            for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
+            {
+                if(compoconnexe[j].Getnom()==compoconnexeinverse[k].Getnom())
+                {
+                    m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
+                }
+            }
+        }
+    }
+}
+
+void Graph::AfficherForteConnexite()
+{
+    for(unsigned int i = 0; i<m_ordre; i++)
+    {
+        for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
+        {
+            std::cout<<m_sommets[i].Getcouleur()[j]<<std::endl;
+        }
+        std::cout<<std::endl;
+    }
+}
+
+void Graph::SauvegarderGraphe()
+{
+    std::ofstream fp {(m_nom+".txt").c_str(), std::ios::out};
+    if (fp)
+    {
+        fp<<m_ordre<<std::endl;
+        fp<<m_nbaretes<<std::endl;
+        for(unsigned int i = 0; i<m_nbaretes; i++)
+        {
+            fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Getpoids()<<std::endl;
+        }
+    }
+    else
+    {
+       std:: cout<<"Erreur"<<std::endl;
+    }
+}
+
+void Graph::SupprimerSommet()
+{
+    std::string sommetsupr;
+    bool suprvalide;
+    std::vector<Edge> newArete;
+    std::vector<Vertex> newSommet;
+    std::cout<<"Veuillez nommer le sommet a supprimer"<<std::endl;
+    std::cin>>sommetsupr;
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        if(sommetsupr == m_sommets[i].Getnom())
+            suprvalide = true;
+    }
+    if(suprvalide == true)
+    {
+        ///Pour les sommets
+        for(unsigned int i = 0; i<m_sommets.size(); i++)
+        {
+            ///On ajoute tous les sommets sauf celui a supprimer
+            if(sommetsupr != m_sommets[i].Getnom())
+                newSommet.push_back(m_sommets[i]);
+        }
+        ///On met a jour les sommets
+        m_sommets = newSommet;
+
+        for(unsigned int i = 0; i<m_aretes.size(); i++)
+        {
+            if(m_aretes[i].Gets1().Getnom() != sommetsupr && m_aretes[i].Gets2().Getnom() != sommetsupr)
+                newArete.push_back(m_aretes[i]);
+        }
+
+        m_aretes = newArete;
+
+        ///On reinitiallise le graphe
+        Initialisation();
+    }
+}
+
+void Edge::Sets1(Vertex* val)
+{
+    m_s1.Setnom(val->Getnom());
+    m_s1.Setmarque(val->Getmarque());
+    m_s1.Setindice(val->Getindice());
+}
+
+void Edge::Sets2(Vertex* val)
+{
+    m_s2.Setnom(val->Getnom());
+    m_s2.Setmarque(val->Getmarque());
+    m_s2.Setindice(val->Getindice());
+}
+
 

@@ -6,13 +6,12 @@
 
 int main()
 {
-      /*
+
     /// A appeler en 1er avant d'instancier des objets graphiques etc...
     grman::init();
-
     /// Le nom du répertoire où se trouvent les images à charger
     grman::set_pictures_path("pics");
-
+/*
     /// Un exemple de graphe
     Graph g;
     g.make_example();
@@ -28,11 +27,16 @@ int main()
         /// Mise à jour générale (clavier/souris/buffer etc...)
         grman::mettre_a_jour();
     }
-
-    grman::fermer_allegro();
 */
-  GraphList* test = new GraphList;
-  test->Getgraphes().front().KconnexiteArete();
+    grman::fermer_allegro();
+
+      GraphList* test = new GraphList;
+        test->Setmatriceajd();
+        test->Getgraphes().front().AfficherMatriceAdj();
+        test->SupprimerSommet();
+        test->Setmatriceajd();
+        test->Getgraphes().front().AfficherMatriceAdj();
+        test->SauvegarderFichier();
 
     return 0;
 }

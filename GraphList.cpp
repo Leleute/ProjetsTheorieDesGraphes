@@ -13,7 +13,7 @@ GraphList::GraphList()
         for(unsigned int i=0; i<m_listnoms.size(); i++)
         {
             //Graphe* graph = new Graphe(m_listnoms[i]);
-            Graphe graph(m_listnoms[i]);
+            Graph graph(m_listnoms[i]);
             m_graphes.push_back(graph);
         }
         fp.close();
@@ -55,26 +55,14 @@ GraphList::~GraphList()
 
 void GraphList::SupprimerSommet()
 {
-    string sommetsuppr;
-    bool valide = false;
     for(unsigned int i = 0; i<m_graphes.size(); i++)
     {
         if(m_graphes[i].Getactif() == true )
         {
-            while(valide == false)
-            {
-            cout<<"choisissez le sommet que vous voulez supprimer"<<endl;
-            cin>>sommetsuppr;
-            for(unsigned int j; j<m_graphes[i].Getsommets().size(); j++)
-                {
-                if(sommetsuppr == m_graphes[i].Getsommets()[j].Getnom()) valide = true;
-                }
-            }
-            m_graphes[i].SupprimerSommet(sommetsuppr);
+            m_graphes[i].SupprimerSommet();
         }
     }
 }
-
 
 void GraphList::Setmatriceajd()
 {

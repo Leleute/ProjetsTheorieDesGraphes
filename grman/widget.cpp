@@ -346,7 +346,8 @@ void WidgetEdge::draw()
     if ( !(m_attach[0] && m_attach[1] ) )
         return;
 
-    Coords p[2] {
+    Coords p[2]
+    {
         m_attach[0]->get_center_abs_pos(),
         m_attach[1]->get_center_abs_pos()
     };
@@ -359,7 +360,8 @@ void WidgetEdge::draw()
     p[1] = m_attach[1]->get_abs_frame().intersect(-vec_dir);
 
     // Dessin du lien cadre à cadre
-    thick_line(page, p[0].x, p[0].y, p[1].x, p[1].y, m_thickness, m_color);
+    thick_line(page, p[0].x, p[0].y, p[1].x, p[1].y, m_thickness, m_color); /// LIGNE DU DESSIN DE LA ARETE
+    ///M_THICKNESS == EPAISSEUR
 
     // Calcul du nouveau vecteur cadre à cadre
     vec_dir = p[1] - p[0];
