@@ -1,0 +1,236 @@
+# depslib dependency file v1.0
+1522575069 source:c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\coords.cpp
+	"coords.h"
+
+1522575424 c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\coords.h
+	<cmath>
+
+1522760006 source:c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1522539041 c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1509222372 c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\grman_couleurs.h
+
+1522636616 c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522636919 source:c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\grman\widget.cpp
+	"widget.h"
+
+1522657075 source:c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
+1522656089 c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1522748607 source:c:\users\ghias\downloads\graph_lib_v1\graph_lib_exemple_graph\graph.cpp
+	"graph.h"
+
+1522748607 source:c:\users\ghias\desktop\codefercoq\graph.cpp
+	"graph.h"
+
+1522656089 c:\users\ghias\desktop\codefercoq\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1522539041 c:\users\ghias\desktop\codefercoq\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1509222372 c:\users\ghias\desktop\codefercoq\grman\grman_couleurs.h
+
+1522575424 c:\users\ghias\desktop\codefercoq\grman\coords.h
+	<cmath>
+
+1522636616 c:\users\ghias\desktop\codefercoq\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522575069 source:c:\users\ghias\desktop\codefercoq\grman\coords.cpp
+	"coords.h"
+
+1522760006 source:c:\users\ghias\desktop\codefercoq\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1522636919 source:c:\users\ghias\desktop\codefercoq\grman\widget.cpp
+	"widget.h"
+
+1522872457 source:c:\users\ghias\desktop\codefercoq\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"GraphList.h"
+	"graph.h"
+
+1522869057 source:c:\users\ghias\desktop\codefercoq\arete.cpp
+	"Arete.h"
+
+1522871403 c:\users\ghias\desktop\codefercoq\arete.h
+	<iostream>
+	<vector>
+	"Sommet.h"
+	<allegro.h>
+
+1522871403 c:\users\ghias\desktop\codefercoq\sommet.h
+	<iostream>
+	<vector>
+	<allegro.h>
+
+1522869057 source:c:\users\ghias\desktop\codefercoq\graphe.cpp
+	"Graphe.h"
+	<queue>
+
+1522869057 c:\users\ghias\desktop\codefercoq\graphe.h
+	<vector>
+	<iostream>
+	"Arete.h"
+	"Graphe.h"
+	"fstream"
+
+1522869057 source:c:\users\ghias\desktop\codefercoq\graphlist.cpp
+	"GraphList.h"
+
+1522869057 c:\users\ghias\desktop\codefercoq\graphlist.h
+	"Graphe.h"
+
+1522869057 source:c:\users\ghias\desktop\codefercoq\sommet.cpp
+	"Sommet.h"
+
+1522869057 source:c:\users\ghias\desktop\projetecologique\arete.cpp
+	"Arete.h"
+
+1522871403 c:\users\ghias\desktop\projetecologique\arete.h
+	<iostream>
+	<vector>
+	"Sommet.h"
+	<allegro.h>
+
+1522871403 c:\users\ghias\desktop\projetecologique\sommet.h
+	<iostream>
+	<vector>
+	<allegro.h>
+
+1522873486 source:c:\users\ghias\desktop\projetecologique\graph.cpp
+	"graph.h"
+
+1522656089 c:\users\ghias\desktop\projetecologique\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1522539041 c:\users\ghias\desktop\projetecologique\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1509222372 c:\users\ghias\desktop\projetecologique\grman\grman_couleurs.h
+
+1522575424 c:\users\ghias\desktop\projetecologique\grman\coords.h
+	<cmath>
+
+1522636616 c:\users\ghias\desktop\projetecologique\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522869057 source:c:\users\ghias\desktop\projetecologique\graphe.cpp
+	"Graphe.h"
+	<queue>
+
+1522869057 c:\users\ghias\desktop\projetecologique\graphe.h
+	<vector>
+	<iostream>
+	"Arete.h"
+	"Graphe.h"
+	"fstream"
+
+1522869057 source:c:\users\ghias\desktop\projetecologique\graphlist.cpp
+	"GraphList.h"
+
+1522869057 c:\users\ghias\desktop\projetecologique\graphlist.h
+	"Graphe.h"
+
+1522575069 source:c:\users\ghias\desktop\projetecologique\grman\coords.cpp
+	"coords.h"
+
+1522760006 source:c:\users\ghias\desktop\projetecologique\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1522636919 source:c:\users\ghias\desktop\projetecologique\grman\widget.cpp
+	"widget.h"
+
+1522917472 source:c:\users\ghias\desktop\projetecologique\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"GraphList.h"
+	"graph.h"
+
+1522869057 source:c:\users\ghias\desktop\projetecologique\sommet.cpp
+	"Sommet.h"
+

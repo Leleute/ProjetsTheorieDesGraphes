@@ -1,5 +1,3 @@
-5
-3
+4
+1
 poisson 1 oiseau 1 1
-arbre 1 florian 1 1
-jambon 1 florian 1 1
