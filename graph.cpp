@@ -164,12 +164,9 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 /// de chargement de fichiers par exemple.
 /// Bien sûr on ne veut pas que vos graphes soient construits
 /// "à la main" dans le code comme ça.
-void Graph::animaux()
+void Graph::make_example()
 {
-            m_vertices.clear();
-      m_edges.clear();
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-<<<<<<< HEAD
     // La ligne précédente est en gros équivalente à :
     // m_interface = new GraphInterface(50, 0, 750, 600);
     /*
@@ -184,9 +181,6 @@ void Graph::animaux()
         add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
         add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
     */
-=======
-
->>>>>>> ebef66f0849355c30cc139e1543d927bdd53d2cb
     add_interfaced_vertex(0,1.0f, 150,150,"algue.bmp");
     add_interfaced_vertex(1,1.0f, 150,400,"herbeMarine.bmp");
     add_interfaced_vertex(2,1.0f, 350,50,"crevette.bmp");
@@ -219,48 +213,20 @@ void Graph::animaux()
     add_interfaced_edge(16, 7, 10, 1);
     add_interfaced_edge(17, 10, 9, 1);
     add_interfaced_edge(18, 10, 11, 1);
-
+    /*
+    /// Les arcs doivent être définis entre des sommets qui existent !
+    // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
+    add_interfaced_edge(0, 1, 2, 50.0);
+    add_interfaced_edge(1, 0, 1, 50.0);
+    add_interfaced_edge(2, 1, 3, 75.0);
+    add_interfaced_edge(3, 4, 1, 25.0);
+    add_interfaced_edge(4, 6, 3, 25.0);
+    add_interfaced_edge(5, 7, 3, 25.0);
+    add_interfaced_edge(6, 3, 4, 0.0);
+    add_interfaced_edge(7, 2, 0, 100.0);
+    add_interfaced_edge(8, 5, 2, 20.0);
+    add_interfaced_edge(9, 3, 7, 80.0); */
 }
-
-    void Graph::niveau1()
-    {
-      m_vertices.clear();
-      m_edges.clear();
-              m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-
-    add_interfaced_vertex(0,1.0f, 150,400,"boeuf.bmp");
-    add_interfaced_vertex(1,1.0f, 500,400,"graines.bmp");
-    add_interfaced_vertex(2,1.0f, 300,200,"homme.bmp");
-    add_interfaced_vertex(3,1.0f, 450,100,"mouton.bmp");
-    add_interfaced_vertex(4,1.0f, 700,100,"herbe.bmp");
-
-     add_interfaced_edge(0, 0, 2, 1);
-    add_interfaced_edge(1, 1, 0, 1);
-    add_interfaced_edge(2, 1, 2, 1);
-    add_interfaced_edge(3, 3, 2, 1);
-    add_interfaced_edge(4, 4, 3, 1);
-    }
-    void Graph::niveau2()
-    {
-                m_vertices.clear();
-      m_edges.clear();
-  m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-
-    add_interfaced_vertex(0,1.0f, 150,100,"cachalot.bmp");
-    add_interfaced_vertex(1,1.0f, 500,70,"calamar.bmp");
-    add_interfaced_vertex(2,1.0f, 600,300,"ecrevisse.bmp");
-    add_interfaced_vertex(3,1.0f, 400,420,"zooplancton.bmp");
-    add_interfaced_vertex(4,1.0f, 680,480,"phytoplancton.bmp");
-    add_interfaced_vertex(5,1.0f, 150,300,"thon.bmp");
-
-    add_interfaced_edge(0, 1, 0, 1);
-    add_interfaced_edge(1, 5, 0, 1);
-    add_interfaced_edge(2, 5, 2, 1);
-    add_interfaced_edge(3, 3, 2, 1);
-    add_interfaced_edge(4, 3, 5, 1);
-        add_interfaced_edge(5, 2, 1, 1);
-    add_interfaced_edge(6, 4, 3, 1);
-    }
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
