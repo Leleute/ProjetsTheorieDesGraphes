@@ -14,13 +14,24 @@ int main()
 
     /// Un exemple de graphe
     Graph g;
-    g.make_example();
-
-
+//g.animaux();
+////g.niveau1();
+//g.niveau2();
+bool test = true;
     /// Vous gardez la main sur la "boucle de jeu"
     /// ( contrairement à des frameworks plus avancés )
     while ( !key[KEY_ESC] )
     {
+          if(test == true)
+          {
+                test = false;
+                  g.niveau2();
+          }
+          if(test == false)
+          {
+                g.niveau1();
+                test = true;
+          }
 
         /// Il faut appeler les méthodes d'update des objets qui comportent des widgets
         g.update();

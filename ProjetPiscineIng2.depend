@@ -325,3 +325,89 @@
 	"GraphList.h"
 	"graph.h"
 
+1523124092 source:c:\users\ghias\desktop\projet\graph.cpp
+	"graph.h"
+	<queue>
+	"fstream"
+	<algorithm>
+
+1523123438 c:\users\ghias\desktop\projet\graph.h
+	<iostream>
+	<map>
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1523121176 c:\users\ghias\desktop\projet\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1523121176 c:\users\ghias\desktop\projet\grman\grman_couleurs.h
+
+1523121176 c:\users\ghias\desktop\projet\grman\coords.h
+	<cmath>
+
+1523121176 c:\users\ghias\desktop\projet\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1523122574 source:c:\users\ghias\desktop\projet\graphlist.cpp
+	"GraphList.h"
+
+1523121176 c:\users\ghias\desktop\projet\graphlist.h
+	"Graphe.h"
+	"graph.h"
+
+1523121176 c:\users\ghias\desktop\projet\graphe.h
+	<vector>
+	<iostream>
+	"Arete.h"
+	"Graphe.h"
+	"fstream"
+
+1523121176 c:\users\ghias\desktop\projet\arete.h
+	<iostream>
+	<vector>
+	"Sommet.h"
+	<allegro.h>
+
+1523121176 c:\users\ghias\desktop\projet\sommet.h
+	<iostream>
+	<vector>
+	<allegro.h>
+
+1523121176 source:c:\users\ghias\desktop\projet\grman\coords.cpp
+	"coords.h"
+
+1523121176 source:c:\users\ghias\desktop\projet\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1523121176 source:c:\users\ghias\desktop\projet\grman\widget.cpp
+	"widget.h"
+
+1523124151 source:c:\users\ghias\desktop\projet\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"GraphList.h"
+	"graph.h"
+
