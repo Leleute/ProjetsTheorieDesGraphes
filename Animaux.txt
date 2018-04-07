@@ -13,10 +13,9 @@ carpe 1 truite 1 1
 carpe 1 martinPecheur 1 1
 truite 1 martinPecheur 1 1
 mouche 1 libellule 1 1
-mouche 1 grenouille 1 1
 mouche 1 tortue 1 1
 limace 1 tortue 1 1
-libellule 1 grenouille 1 1
-grenouille 1 martinPecheur 1 1
-grenouille 1 serpent 1 1
-
+mouche 1 grenouille 20 1
+libellule 1 grenouille 20 1
+grenouille 20 martinPecheur 1 1
+grenouille 20 serpent 30 1

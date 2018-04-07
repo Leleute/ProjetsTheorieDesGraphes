@@ -171,7 +171,7 @@ void Graph::make_example()
     // m_interface = new GraphInterface(50, 0, 750, 600);
     /*
         /// Les sommets doivent être définis avant les arcs
-        // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
+
         add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
         add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
         add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
@@ -339,8 +339,10 @@ Graph::Graph(std::string nomfichier)
     }
 }
 
+
 void Graph::Initialisation()
 {
+    std::cout<<m_nbaretes<<std::endl;
     ///On met a jour le nombre d'arete et de sommet
     m_nbaretes = m_aretes.size();
     m_ordre = m_sommets.size();
@@ -385,6 +387,74 @@ void Graph::Initialisation()
     this->MapVertex();
 }
 
+void Graph::AjouterSommet(Graph grapheSave)
+{
+    bool newSommet;
+    std::vector<std::string> listNewSommet;
+    std::string sommetAjout;
+    int tailleNewSommet;
+    std::cout<<"Voici la liste des sommets possible a ajouter : "<<std::endl;
+    for(unsigned int i = 0; i<grapheSave.Getsommets().size(); i++)
+    {
+        newSommet = true;
+        for(unsigned int j = 0; j<m_sommets.size(); j++)
+        {
+            if(grapheSave.Getsommets()[i].Getnom() == m_sommets[j].Getnom()) newSommet = false;
+        }
+        if(newSommet == true)
+        {
+            listNewSommet.push_back(grapheSave.Getsommets()[i].Getnom());
+            std::cout<<grapheSave.Getsommets()[i].Getnom()<<" ,"<<std::endl;
+        }
+    }
+    if(listNewSommet.size() == 0 )std::cout<<"Le graphe est deja complet"<<std::endl;
+    if(listNewSommet.size() != 0 ) std::cin>>sommetAjout;
+    std::vector<Edge> newArete;
+    for(unsigned int i = 0; i<listNewSommet.size();i++)
+    {
+        ///On ajoute le sommet et les aretes
+        if(sommetAjout == listNewSommet[i])
+        {
+            for(unsigned int j = 0; j<grapheSave.Getaretes().size(); j++)
+            {
+                if(grapheSave.Getaretes()[j].Gets1().Getnom() == listNewSommet[i] || grapheSave.Getaretes()[j].Gets2().Getnom() == listNewSommet[i])
+                {
+                    Edge newEdgeCrea(grapheSave.Getaretes()[j].Gets1().Getnom(),grapheSave.Getaretes()[j].Gets1().Gettaille(),grapheSave.Getaretes()[j].Gets2().Getnom(),grapheSave.Getaretes()[j].Gets2().Gettaille(),grapheSave.Getaretes()[j].Getpoids());
+                    newArete.push_back(newEdgeCrea);
+                }
+            }
+        }
+    }
+    bool aRajouter;
+    std::cout<<"Test"<<std::endl;
+    for(unsigned int i = 0; i<newArete.size(); i++)
+    {
+        aRajouter = false;
+        for(unsigned int j = 0; j<m_sommets.size(); j++)
+        {
+            if(newArete[i].Gets1().Getnom() == m_sommets[j].Getnom() ||newArete[i].Gets2().Getnom() == m_sommets[j].Getnom())
+            {
+                aRajouter = true;
+            }
+        }
+        if(aRajouter == true) m_aretes.push_back(newArete[i]);
+
+    }
+     for(unsigned int i = 0; i<listNewSommet.size();i++)
+    {
+        ///On ajoute le sommet et les aretes
+        if(sommetAjout == listNewSommet[i])
+        {
+            std::cout<<"Veuillez rentrer l'ordre du nouveau sommet"<<std::endl;
+            std::cin>>tailleNewSommet;
+            Vertex newSommetCrea(sommetAjout,tailleNewSommet);
+            m_sommets.push_back(newSommetCrea);
+        }
+    }
+    Initialisation();
+    std::cout<<m_nbaretes<<std::endl;
+}
+
 
 ///A revoir
 void Graph::Setmatriceadja()
@@ -427,7 +497,99 @@ void Graph::AfficherMatriceAdj()
     for(unsigned int i= 0; i<m_ordre; i++)
     {
         for(unsigned int j = 0; j<m_ordre; j++)
+        {void Graph::ForteConnexite()
+{
+    std::queue<int> file;
+    std::vector<Vertex> vecForteConnexite;
+    ///On initialise les indices des sommets
+    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        if(m_sommets[i].Getcouleur().size() == 0)
         {
+            ///Composantes fortement connexte partant de x (via vecteur d'arrete)
+
+            ///On initialise le marquage a faux
+            Initialisation();
+            ///On ajoute le sommets de debut
+            file.push(i);
+            ///On le marque
+            m_sommets[i].Setmarque(true);
+            ///On crée le vecteur qui va recuperer les arretes utilisés
+            std::vector<Vertex> compoconnexe;
+            while(file.size() != 0)
+            {
+                for(unsigned int j = 0; j<m_aretes.size(); j++)
+                {
+                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
+                    {
+                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                        file.push(m_aretes[j].Gets2().Getindice());
+                        ///On le marque
+                        m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
+                    }
+                }
+                file.pop();
+            }
+            for(unsigned int j = 0; j<m_ordre; j++)
+            {
+                if(m_sommets[j].Getmarque() == true)
+                {
+                    ///On recuperer les sommets de la compo connexe dans le sens positif
+                    compoconnexe.push_back(m_sommets[j]);
+                }
+            }
+            std::cout<<std::endl<<std::endl;
+
+            ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
+
+            ///On initialise le marquage a faux
+            Initialisation();
+            ///On ajoute le sommets de debut
+            file.push(i);
+            ///On le marque
+            m_sommets[i].Setmarque(true);
+            ///On crée le vecteur qui va recuperer les arretes utilisés
+            std::vector<Vertex> compoconnexeinverse;
+            while(file.size() != 0)
+            {
+                for(unsigned int j = 0; j<m_aretes.size(); j++)
+                {
+                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
+                    {
+                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                        file.push(m_aretes[j].Gets1().Getindice());
+                        ///On le marque
+                        m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
+                    }
+                }
+                file.pop();
+            }
+            for(unsigned int j = 0; j<m_ordre; j++)
+            {
+                if(m_sommets[j].Getmarque() == true)
+                {
+                    ///On recuperer les sommets de la compo connexe dans le sens inverse
+                    compoconnexeinverse.push_back(m_sommets[j]);
+                }
+            }
+
+            ///On regarde les si les points d'intersection entre la composante connexe inverse et celle dans le sens positif
+            for(unsigned int j = 0; j<compoconnexe.size(); j++)
+            {
+                for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
+                {
+                    if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
+                    {
+                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
+                    }
+                }
+            }
+        }
+    }
+}
             std::cout<<m_matriceadja[i + j * m_ordre]<<" ";
         }
         std::cout<<std::endl;
@@ -439,7 +601,99 @@ void Graph::AfficherMatriceAdj()
     }
 }
 
-void Graph::ForteConnexite()
+void Graph::ForteConnexite()void Graph::ForteConnexite()
+{
+    std::queue<int> file;
+    std::vector<Vertex> vecForteConnexite;
+    ///On initialise les indices des sommets
+    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        if(m_sommets[i].Getcouleur().size() == 0)
+        {
+            ///Composantes fortement connexte partant de x (via vecteur d'arrete)
+
+            ///On initialise le marquage a faux
+            Initialisation();
+            ///On ajoute le sommets de debut
+            file.push(i);
+            ///On le marque
+            m_sommets[i].Setmarque(true);
+            ///On crée le vecteur qui va recuperer les arretes utilisés
+            std::vector<Vertex> compoconnexe;
+            while(file.size() != 0)
+            {
+                for(unsigned int j = 0; j<m_aretes.size(); j++)
+                {
+                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
+                    {
+                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                        file.push(m_aretes[j].Gets2().Getindice());
+                        ///On le marque
+                        m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
+                    }
+                }
+                file.pop();
+            }
+            for(unsigned int j = 0; j<m_ordre; j++)
+            {
+                if(m_sommets[j].Getmarque() == true)
+                {
+                    ///On recuperer les sommets de la compo connexe dans le sens positif
+                    compoconnexe.push_back(m_sommets[j]);
+                }
+            }
+            std::cout<<std::endl<<std::endl;
+
+            ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
+
+            ///On initialise le marquage a faux
+            Initialisation();
+            ///On ajoute le sommets de debut
+            file.push(i);
+            ///On le marque
+            m_sommets[i].Setmarque(true);
+            ///On crée le vecteur qui va recuperer les arretes utilisés
+            std::vector<Vertex> compoconnexeinverse;
+            while(file.size() != 0)
+            {
+                for(unsigned int j = 0; j<m_aretes.size(); j++)
+                {
+                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
+                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
+                    {
+                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
+                        file.push(m_aretes[j].Gets1().Getindice());
+                        ///On le marque
+                        m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
+                    }
+                }
+                file.pop();
+            }
+            for(unsigned int j = 0; j<m_ordre; j++)
+            {
+                if(m_sommets[j].Getmarque() == true)
+                {
+                    ///On recuperer les sommets de la compo connexe dans le sens inverse
+                    compoconnexeinverse.push_back(m_sommets[j]);
+                }
+            }
+
+            ///On regarde les si les points d'intersection entre la composante connexe inverse et celle dans le sens positif
+            for(unsigned int j = 0; j<compoconnexe.size(); j++)
+            {
+                for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
+                {
+                    if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
+                    {
+                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
+                    }
+                }
+            }
+        }
+    }
+}
 {
     std::queue<int> file;
     std::vector<Vertex> vecForteConnexite;
@@ -550,8 +804,8 @@ void Graph::SauvegarderGraphe()
     std::ofstream fp {(m_nom+".txt").c_str(), std::ios::out};
     if (fp)
     {
-        fp<<m_ordre<<std::endl;
-        fp<<m_nbaretes<<std::endl;
+        fp<<m_sommets.size()<<std::endl;
+        fp<<m_aretes.size()<<std::endl;
         for(unsigned int i = 0; i<m_nbaretes; i++)
         {
             fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Getpoids()<<std::endl;
@@ -564,7 +818,7 @@ void Graph::SauvegarderGraphe()
 }
 
 void Graph::SupprimerSommet(std::string sommetsupr)
-{
+{   std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
     std::vector<Edge> newArete;
     std::vector<Vertex> newSommet;
     ///Pour les sommets
@@ -576,6 +830,7 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     }
     ///On met a jour les sommets
     m_sommets = newSommet;
+       std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
 
     ///Mise a jour des aretes
     for(unsigned int i = 0; i<m_aretes.size(); i++)
@@ -585,6 +840,7 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     }
 
     m_aretes = newArete;
+    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
 
     ///On reinitiallise le graphe
     //Initialisation();
@@ -744,7 +1000,6 @@ void Graph::KconnexiteArete()
     {
         for(unsigned int j = 0; j<m_sommets.size(); j++)
         {
-            std::cout<<"tour numero "<<j + i*m_sommets.size()<<std::endl;
             if(i != j)
             {
                 nombreAreteThisRound = BFSSuppressionArete(j, i);
@@ -766,6 +1021,7 @@ void Graph::sommetKConnexite(int k)
     bool sommetDistinct = false;
     std::vector<int> compteur;
     std::vector<std::string> nomEffacer;
+    std::vector<std::string> sommetAretirer;
     for(unsigned int i = 0; i<k; i++)
     {
         compteur.push_back(0);
@@ -788,14 +1044,14 @@ void Graph::sommetKConnexite(int k)
         {
             for(unsigned int i = 0; i<k; i++)
             {
-                nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
+            nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
             SupprimerSommet(m_sommets[compteur[i]].Getnom());
             }
             if(IsConnexe() == false)
             {
                 for(unsigned int i = 0; i<nomEffacer.size();i++)
                 {
-                    std::cout<<nomEffacer[i]<<std::endl;
+                    sommetAretirer.push_back(nomEffacer[i]);
                 }
             }
         }
@@ -819,6 +1075,19 @@ void Graph::sommetKConnexite(int k)
                 }
             }
         }
+
+    }
+    int i = 0;
+
+    std::cout<<"Les couples de sommets a retirer sont donc : "<<std::endl;
+    while (i < sommetAretirer.size())
+    {
+        for(unsigned j = 0; j < k;j++)
+        {
+            std::cout<<sommetAretirer[i + j]<<" ";
+        }
+            std::cout<<std::endl;
+        i = i+k;
     }
     *this = copie;
 }
@@ -834,13 +1103,11 @@ void Graph::KconnexiteSommet()
     {
         for(unsigned int j = 0; j<m_sommets.size(); j++)
         {
-            std::cout<<"tour numero "<<j + i*m_sommets.size()<<std::endl;
             if(i != j)
             {
                 nombreSommetThisRound = BFSSuppressionSommet(j, i);
                 if(nombreSommetThisRound < kSommetConnexite)
                     kSommetConnexite = nombreSommetThisRound;
-                std::cout<<nombreSommetThisRound<<std::endl;
             }
             *this = copie;
 
@@ -892,8 +1159,6 @@ int Graph::BFSSuppressionArete(int indice1, int indice2)
                         file.push(sommetsuivant);
                         if(sommetsuivant == indice2)
                         {
-                            std::cout<<m_aretes[j].Gets1().Getnom()<<" "<<m_aretes[j].Gets2().Getnom()<<std::endl;
-                            std::cout<<"reussite"<<std::endl;
                         }
 
                     }
@@ -952,7 +1217,6 @@ int Graph::BFSSuppressionSommet(int indice1, int indice2)
             Initialisation();
             m_sommets[indice1].Setmarque(true);
             file.push(indice1);
-            std::cout<<m_sommets[indice1].Getnom()<<" "<<m_sommets[indice2].Getnom()<<std::endl;
             while(!file.empty())
             {
                 sommetselec = file.front();
@@ -1018,7 +1282,6 @@ int Graph::BFSSuppressionSommet(int indice1, int indice2)
         while(m_sommets[indice2].Getmarque() == true);
     }
     return nbchemin;
-
 }
 
 

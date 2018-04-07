@@ -412,6 +412,7 @@ public:
     void SupprimerSommet(std::string sommet);
     void SupprimerArete(int arete);
     void SupprimerAretes(std::vector<int> aretesuppr);
+    void AjouterSommet(Graph graphSave);
     int BFSSuppressionArete(int indice1, int indice2);
     void KconnexiteArete();
 

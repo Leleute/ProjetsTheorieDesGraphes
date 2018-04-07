@@ -12,9 +12,10 @@ GraphList::GraphList()
         }
         for(unsigned int i=0; i<m_listnoms.size(); i++)
         {
-            //Graphe* graph = new Graphe(m_listnoms[i]);
             Graph graph(m_listnoms[i]);
+            Graph graphSave(m_listnoms[i] + "Save");
             m_graphes.push_back(graph);
+            m_graphesSave.push_back(graphSave);
         }
         fp.close();
         string nomgraph;
@@ -72,6 +73,20 @@ void GraphList::SupprimerSommet()
                 }
             }
             m_graphes[i].SupprimerSommet(sommetsuppr);
+            m_graphes[i].Initialisation();
+        }
+    }
+
+}
+
+void GraphList::AjouterSommet()
+{
+    bool valide = false;
+    for(unsigned int i = 0; i<m_graphes.size(); i++)
+    {
+        if(m_graphes[i].Getactif() == true )
+        {
+            m_graphes[i].AjouterSommet(m_graphesSave[i]);
         }
     }
 }

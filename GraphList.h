@@ -20,15 +20,25 @@ public:
     {
         m_graphes = val;
     }
+    vector<Graph> GetgraphesSave()
+    {
+        return m_graphesSave;
+    }
+    void SetgraphesSave(vector<Graph> val)
+    {
+        m_graphesSave = val;
+    }
     void AffichageGraphe();
     void Setmatriceajd();
     void Setforteconnexite();
     void SauvegarderFichier();
     void SupprimerSommet();
+    void AjouterSommet();
 protected:
 
 private:
     vector<Graph> m_graphes;
+    vector<Graph> m_graphesSave;
     vector<string> m_listnoms;
 
 };
