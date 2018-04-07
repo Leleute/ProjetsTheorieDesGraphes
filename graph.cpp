@@ -68,19 +68,6 @@ void Vertex::post_update()
     m_value = m_interface->m_slider_value.get_value();
 }
 
-void Vertex::croissance()
-{
-    if(m_taille > 0)
-    {
-        m_taille += m_rythme*m_taille*(1- m_taille/m_K);
-        ///reste à soustraire tous les K
-    }
-    else if(m_taille <= 0)
-    {
-        m_taille = 0;
-    }
-}
-
 
 
 /***************************************************
@@ -148,6 +135,15 @@ void Edge::post_update()
 }
 
 
+    void Edge::changerK()
+    {
+          m_s2.setK(m_poids * m_s1.Gettaille());
+    }
+
+void Edge::changerTaille()
+{
+     m_s2.Settaille(m_s2.Gettaille() - m_s1.getK());
+}
 
 /***************************************************
                     GRAPH
@@ -286,6 +282,25 @@ void Graph::niveau2()
     add_interfaced_edge(6, 4, 3, 1);
 }
 
+void Graph::croissance()
+{
+      for(int i = 0; i<m_sommets.size(); i++)
+      {
+            if(m_sommets[i].Gettaille() > 0)
+            {
+                  m_sommets[i].Settaille(m_sommets[i].Gettaille() + m_sommets[i].getRythme()*m_sommets[i].Gettaille()*(1 - m_sommets[i].Gettaille()/m_sommets[i].getK()) /** - la somme des K **/);
+            }
+            else if(m_sommets[i].Gettaille() <= 0)
+            {
+                  m_sommets[i].Settaille(0);
+            }
+      }
+      for(int i = 0; i<m_aretes.size();i++)
+      {
+            m_aretes[i].changerK();
+            m_aretes[i].changerTaille();
+      }
+}
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()

@@ -148,6 +148,19 @@ void GraphList::SauvegarderFichier()
 }
 
 
+void GraphList::croissance()
+{
+          for(unsigned int i = 0; i<m_graphes.size(); i++)
+    {
+        if(m_graphes[i].Getactif() == true )
+        {
+            m_graphes[i].croissance();
+        }
+    }
+}
+
+
+
 
 
 

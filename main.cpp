@@ -11,6 +11,7 @@ int main()
     grman::set_pictures_path("pics");
 
 bool reussite;
+int cpt = 0;
     /// Un exemple de graphe
     GraphList g;
     g.Setforteconnexite();
@@ -138,8 +139,21 @@ bool lancementboucle = true;
 
         }
 
+         if(cpt >= 100)
+        {
+
+              cpt=0;
+              g.croissance();
+              for(int i=0; i<g.Getgraphes()[0].Getsommets().size(); i++)
+              {
+                    cout<<g.Getgraphes()[0].Getsommets()[i].Gettaille()<<endl;
+              }
+
+        }
         gr.update();
         grman::mettre_a_jour();
+
+        cpt++;
     }
     //g.SauvegarderFichier();
 
