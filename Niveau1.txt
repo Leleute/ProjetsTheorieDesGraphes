@@ -1,0 +1,7 @@
+5
+5
+herbe 1 mouton 1 1
+mouton 1 homme 1 1
+graine 1 homme 1 1 
+graine 1 boeuf 1 1
+boeuf 1 homme 1 1
