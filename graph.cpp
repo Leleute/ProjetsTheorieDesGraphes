@@ -659,7 +659,9 @@ void Graph::ForteConnexite()
                 {
                     if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
                     {
+
                         m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
+                        std::cout<<m_sommets[compoconnexe[j].Getindice()].Getcouleur().front()<<std::endl;
                     }
                 }
             }
@@ -672,10 +674,9 @@ void Graph::AfficherForteConnexite()
     int nbcolor = 0;
     for(unsigned int i = 0; i<m_sommets.size(); i++)
     {
-        std::cout<<m_sommets[i].Getcouleur().size()<<std::endl;
         for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
         {
-            if(m_sommets[i].Getcouleur()[j] > nbcolor ) nbcolor=m_sommets[i].Getcouleur()[j] + 1;
+            if(m_sommets[i].Getcouleur()[j] >= nbcolor ) nbcolor=m_sommets[i].Getcouleur()[j] + 1;
         }
 
     }
@@ -714,7 +715,6 @@ void Graph::SauvegarderGraphe()
 
 void Graph::SupprimerSommet(std::string sommetsupr)
 {
-    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
     std::vector<Edge> newArete;
     std::vector<Vertex> newSommet;
     ///Pour les sommets
@@ -726,7 +726,6 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     }
     ///On met a jour les sommets
     m_sommets = newSommet;
-    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
 
     ///Mise a jour des aretes
     for(unsigned int i = 0; i<m_aretes.size(); i++)
@@ -736,10 +735,19 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     }
 
     m_aretes = newArete;
-    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
-
-    ///On reinitiallise le graphe
-    //Initialisation();
+    bool sommetExiste;
+    for(unsigned int i = 0; i<m_sommets.size(); i++ )
+    {
+        sommetExiste = false;
+        for(unsigned int j = 0; j<m_aretes.size(); j++ )
+        {
+            if(m_sommets[i].Getnom() == m_aretes[j].Gets1().Getnom() || m_sommets[i].Getnom() == m_aretes[j].Gets2().Getnom())
+            {
+                sommetExiste = true;
+            }
+        }
+        if(sommetExiste == false) SupprimerSommet(Getsommets()[i].Getnom());
+    }
 }
 
 void Graph::SupprimerSommets(std::vector<std::string> sommetsuppr)

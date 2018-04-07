@@ -97,7 +97,7 @@ void GraphList::Setmatriceajd()
 {
     for(unsigned int i = 0; i<m_graphes.size(); i++)
     {
-        m_graphes[i].Setmatriceadja();
+        if(m_graphes[i].Getactif() == true) m_graphes[i].Setmatriceadja();
     }
 }
 
@@ -105,7 +105,7 @@ void GraphList::Setforteconnexite()
 {
     for(unsigned int i = 0; i<m_graphes.size(); i++)
     {
-        m_graphes[i].ForteConnexite();
+        if(m_graphes[i].Getactif() == true) m_graphes[i].ForteConnexite();
     }
 }
 

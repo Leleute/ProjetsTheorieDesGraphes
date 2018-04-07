@@ -34,6 +34,8 @@ public:
     void SauvegarderFichier();
     void SupprimerSommet();
     void AjouterSommet();
+    void SetGrapheActif(int i){ m_graphes[i].Setactif(true); }
+    void SetGrapheNonActif(int i){ m_graphes[i].Setactif(false); }
 protected:
 
 private:
