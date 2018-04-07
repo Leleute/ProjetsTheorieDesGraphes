@@ -411,3 +411,89 @@
 	"fstream"
 	<algorithm>
 
+1523132806 source:c:\users\ghias\desktop\naruto\graph.cpp
+	"graph.h"
+	<queue>
+	"fstream"
+	<algorithm>
+
+1523132806 c:\users\ghias\desktop\naruto\graph.h
+	<iostream>
+	<map>
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1523130277 c:\users\ghias\desktop\naruto\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1523130277 c:\users\ghias\desktop\naruto\grman\grman_couleurs.h
+
+1523130277 c:\users\ghias\desktop\naruto\grman\coords.h
+	<cmath>
+
+1523130277 c:\users\ghias\desktop\naruto\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1523131544 source:c:\users\ghias\desktop\naruto\graphlist.cpp
+	"GraphList.h"
+
+1523130276 c:\users\ghias\desktop\naruto\graphlist.h
+	"Graphe.h"
+	"graph.h"
+
+1523130276 c:\users\ghias\desktop\naruto\graphe.h
+	<vector>
+	<iostream>
+	"Arete.h"
+	"Graphe.h"
+	"fstream"
+
+1523130276 c:\users\ghias\desktop\naruto\arete.h
+	<iostream>
+	<vector>
+	"Sommet.h"
+	<allegro.h>
+
+1523130277 c:\users\ghias\desktop\naruto\sommet.h
+	<iostream>
+	<vector>
+	<allegro.h>
+
+1523130277 source:c:\users\ghias\desktop\naruto\grman\coords.cpp
+	"coords.h"
+
+1523130277 source:c:\users\ghias\desktop\naruto\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1523130277 source:c:\users\ghias\desktop\naruto\grman\widget.cpp
+	"widget.h"
+
+1523132077 source:c:\users\ghias\desktop\naruto\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"GraphList.h"
+	"graph.h"
+

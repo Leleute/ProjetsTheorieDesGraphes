@@ -68,6 +68,19 @@ void Vertex::post_update()
     m_value = m_interface->m_slider_value.get_value();
 }
 
+void Vertex::croissance()
+{
+    if(m_taille > 0)
+    {
+        m_taille += m_rythme*m_taille*(1- m_taille/m_K);
+        ///reste à soustraire tous les K
+    }
+    else if(m_taille <= 0)
+    {
+        m_taille = 0;
+    }
+}
+
 
 
 /***************************************************
@@ -169,18 +182,35 @@ void Graph::make_example()
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     // La ligne précédente est en gros équivalente à :
     // m_interface = new GraphInterface(50, 0, 750, 600);
-    /*
-        /// Les sommets doivent être définis avant les arcs
 
-        add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
-        add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
-        add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
-        add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
-        add_interfaced_vertex(4,  100.0, 600, 300, "clown5.jpg");
-        add_interfaced_vertex(5,  0.0, 100, 500, "bad_clowns_xx3xx.jpg", 0);
-        add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
-        add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
-    */
+    /// Les sommets doivent être définis avant les arcs
+
+    add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
+    add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
+    add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
+    add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
+    add_interfaced_vertex(4,  100.0, 600, 300, "clown5.jpg");
+    add_interfaced_vertex(5,  0.0, 100, 500, "bad_clowns_xx3xx.jpg", 0);
+    add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
+    add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
+
+    add_interfaced_edge(0, 1, 2, 50.0);
+    add_interfaced_edge(1, 0, 1, 50.0);
+    add_interfaced_edge(2, 1, 3, 75.0);
+    add_interfaced_edge(3, 4, 1, 25.0);
+    add_interfaced_edge(4, 6, 3, 25.0);
+    add_interfaced_edge(5, 7, 3, 25.0);
+    add_interfaced_edge(6, 3, 4, 0.0);
+    add_interfaced_edge(7, 2, 0, 100.0);
+    add_interfaced_edge(8, 5, 2, 20.0);
+    add_interfaced_edge(9, 3, 7, 80.0);
+}
+void Graph::animaux()
+{
+    m_vertices.clear();
+    m_edges.clear();
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
     add_interfaced_vertex(0,1.0f, 150,150,"algue.bmp");
     add_interfaced_vertex(1,1.0f, 150,400,"herbeMarine.bmp");
     add_interfaced_vertex(2,1.0f, 350,50,"crevette.bmp");
@@ -213,20 +243,49 @@ void Graph::make_example()
     add_interfaced_edge(16, 7, 10, 1);
     add_interfaced_edge(17, 10, 9, 1);
     add_interfaced_edge(18, 10, 11, 1);
-    /*
-    /// Les arcs doivent être définis entre des sommets qui existent !
-    // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
-    add_interfaced_edge(0, 1, 2, 50.0);
-    add_interfaced_edge(1, 0, 1, 50.0);
-    add_interfaced_edge(2, 1, 3, 75.0);
-    add_interfaced_edge(3, 4, 1, 25.0);
-    add_interfaced_edge(4, 6, 3, 25.0);
-    add_interfaced_edge(5, 7, 3, 25.0);
-    add_interfaced_edge(6, 3, 4, 0.0);
-    add_interfaced_edge(7, 2, 0, 100.0);
-    add_interfaced_edge(8, 5, 2, 20.0);
-    add_interfaced_edge(9, 3, 7, 80.0); */
+
 }
+
+void Graph::niveau1()
+{
+    m_vertices.clear();
+    m_edges.clear();
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
+    add_interfaced_vertex(0,1.0f, 150,400,"boeuf.bmp");
+    add_interfaced_vertex(1,1.0f, 500,400,"graines.bmp");
+    add_interfaced_vertex(2,1.0f, 300,200,"homme.bmp");
+    add_interfaced_vertex(3,1.0f, 450,100,"mouton.bmp");
+    add_interfaced_vertex(4,1.0f, 700,100,"herbe.bmp");
+
+    add_interfaced_edge(0, 0, 2, 1);
+    add_interfaced_edge(1, 1, 0, 1);
+    add_interfaced_edge(2, 2, 1, 1);
+    add_interfaced_edge(3, 3, 2, 1);
+    add_interfaced_edge(4, 4, 3, 1);
+}
+void Graph::niveau2()
+{
+    m_vertices.clear();
+    m_edges.clear();
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
+    add_interfaced_vertex(0,1.0f, 150,100,"cachalot.bmp");
+    add_interfaced_vertex(1,1.0f, 500,70,"calamar.bmp");
+    add_interfaced_vertex(2,1.0f, 600,300,"ecrevisse.bmp");
+    add_interfaced_vertex(3,1.0f, 400,420,"zooplancton.bmp");
+    add_interfaced_vertex(4,1.0f, 680,480,"phytoplancton.bmp");
+    add_interfaced_vertex(5,1.0f, 150,300,"thon.bmp");
+
+    add_interfaced_edge(0, 1, 0, 1);
+    add_interfaced_edge(1, 5, 0, 1);
+    add_interfaced_edge(2, 5, 2, 1);
+    add_interfaced_edge(3, 3, 2, 1);
+    add_interfaced_edge(4, 3, 5, 1);
+    add_interfaced_edge(5, 2, 1, 1);
+    add_interfaced_edge(6, 4, 3, 1);
+}
+
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
@@ -398,7 +457,8 @@ void Graph::AjouterSommet(Graph grapheSave)
         newSommet = true;
         for(unsigned int j = 0; j<m_sommets.size(); j++)
         {
-            if(grapheSave.Getsommets()[i].Getnom() == m_sommets[j].Getnom()) newSommet = false;
+            if(grapheSave.Getsommets()[i].Getnom() == m_sommets[j].Getnom())
+                newSommet = false;
         }
         if(newSommet == true)
         {
@@ -406,10 +466,12 @@ void Graph::AjouterSommet(Graph grapheSave)
             std::cout<<grapheSave.Getsommets()[i].Getnom()<<" ,"<<std::endl;
         }
     }
-    if(listNewSommet.size() == 0 )std::cout<<"Le graphe est deja complet"<<std::endl;
-    if(listNewSommet.size() != 0 ) std::cin>>sommetAjout;
+    if(listNewSommet.size() == 0 )
+        std::cout<<"Le graphe est deja complet"<<std::endl;
+    if(listNewSommet.size() != 0 )
+        std::cin>>sommetAjout;
     std::vector<Edge> newArete;
-    for(unsigned int i = 0; i<listNewSommet.size();i++)
+    for(unsigned int i = 0; i<listNewSommet.size(); i++)
     {
         ///On ajoute le sommet et les aretes
         if(sommetAjout == listNewSommet[i])
@@ -436,10 +498,11 @@ void Graph::AjouterSommet(Graph grapheSave)
                 aRajouter = true;
             }
         }
-        if(aRajouter == true) m_aretes.push_back(newArete[i]);
+        if(aRajouter == true)
+            m_aretes.push_back(newArete[i]);
 
     }
-     for(unsigned int i = 0; i<listNewSommet.size();i++)
+    for(unsigned int i = 0; i<listNewSommet.size(); i++)
     {
         ///On ajoute le sommet et les aretes
         if(sommetAjout == listNewSommet[i])
@@ -510,6 +573,10 @@ void Graph::AfficherMatriceAdj()
 
 void Graph::ForteConnexite()
 {
+    for(unsigned int k = 0; k<m_sommets.size(); k++)
+                {
+                    m_sommets[k].CleanColor();
+                }
     std::queue<int> file;
     std::vector<Vertex> vecForteConnexite;
     ///On initialise les indices des sommets
@@ -551,7 +618,6 @@ void Graph::ForteConnexite()
                     compoconnexe.push_back(m_sommets[j]);
                 }
             }
-            std::cout<<std::endl<<std::endl;
 
             ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
 
@@ -603,11 +669,26 @@ void Graph::ForteConnexite()
 
 void Graph::AfficherForteConnexite()
 {
-    for(unsigned int i = 0; i<m_ordre; i++)
+    int nbcolor = 0;
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
     {
+        std::cout<<m_sommets[i].Getcouleur().size()<<std::endl;
         for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
         {
-            std::cout<<m_sommets[i].Getcouleur()[j]<<std::endl;
+            if(m_sommets[i].Getcouleur()[j] > nbcolor ) nbcolor=m_sommets[i].Getcouleur()[j] + 1;
+        }
+
+    }
+    std::cout<<"il y a "<<nbcolor<<" composante(s) connexe(s) : "<<std::endl;
+    for(unsigned int i = 0; i<nbcolor; i++)
+    {
+        std::cout<<"Composante Connexe numero "<<i<<std::endl;
+        for(unsigned int j= 0; j<m_sommets.size(); j++)
+        {
+            for(unsigned int k = 0; k<m_sommets[j].Getcouleur().size(); k++)
+            {
+                if(m_sommets[j].Getcouleur()[k] == i) std::cout<<m_sommets[j].Getnom()<<std::endl;
+            }
         }
         std::cout<<std::endl;
     }
@@ -632,7 +713,8 @@ void Graph::SauvegarderGraphe()
 }
 
 void Graph::SupprimerSommet(std::string sommetsupr)
-{   std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
+{
+    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
     std::vector<Edge> newArete;
     std::vector<Vertex> newSommet;
     ///Pour les sommets
@@ -644,7 +726,7 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     }
     ///On met a jour les sommets
     m_sommets = newSommet;
-       std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
+    std::cout<<m_sommets.size()<<" "<<m_aretes.size()<<std::endl;
 
     ///Mise a jour des aretes
     for(unsigned int i = 0; i<m_aretes.size(); i++)
@@ -850,7 +932,8 @@ void Graph::sommetKConnexite(int k)
         {
             for(unsigned int j = 0; j<k; j++)
             {
-                if(i != j && compteur[i] == compteur[j]) sommetDistinct = false;
+                if(i != j && compteur[i] == compteur[j])
+                    sommetDistinct = false;
             }
         }
         ///On supprime les k sommets a supprimer
@@ -858,12 +941,12 @@ void Graph::sommetKConnexite(int k)
         {
             for(unsigned int i = 0; i<k; i++)
             {
-            nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
-            SupprimerSommet(m_sommets[compteur[i]].Getnom());
+                nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
+                SupprimerSommet(m_sommets[compteur[i]].Getnom());
             }
             if(IsConnexe() == false)
             {
-                for(unsigned int i = 0; i<nomEffacer.size();i++)
+                for(unsigned int i = 0; i<nomEffacer.size(); i++)
                 {
                     sommetAretirer.push_back(nomEffacer[i]);
                 }
@@ -880,7 +963,8 @@ void Graph::sommetKConnexite(int k)
             ///Si on a attent le rang max
             if(compteur[k-i-1] == m_sommets.size())
             {
-                if(i == k-1) actif = false;
+                if(i == k-1)
+                    actif = false;
                 if(i < m_sommets.size() - 1 )
                 {
 
@@ -896,11 +980,11 @@ void Graph::sommetKConnexite(int k)
     std::cout<<"Les couples de sommets a retirer sont donc : "<<std::endl;
     while (i < sommetAretirer.size())
     {
-        for(unsigned j = 0; j < k;j++)
+        for(unsigned j = 0; j < k; j++)
         {
             std::cout<<sommetAretirer[i + j]<<" ";
         }
-            std::cout<<std::endl;
+        std::cout<<std::endl;
         i = i+k;
     }
     *this = copie;
@@ -1071,7 +1155,7 @@ int Graph::BFSSuppressionSommet(int indice1, int indice2)
                         if((m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getprede() )|| (m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getprede()))
                         {
                             if(sommetselec != indice1 && sommetselec != indice2)
-                            SommetSupr.push_back(m_sommets[sommetselec].Getnom());
+                                SommetSupr.push_back(m_sommets[sommetselec].Getnom());
                             sommetselec = m_sommets[sommetselec].Getprede();
 
                         }
@@ -1116,10 +1200,3 @@ void Graph::MapEdge()
         m_edges[i] = m_aretes[i];
     }
 }
-
-
-
-
-
-
-

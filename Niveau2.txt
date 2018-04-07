@@ -1,0 +1,9 @@
+6
+7
+calamar 1 cachalot 1 1
+thon 1 cachalot 1 1
+thon 1 crevette 1 1
+crevette 1 calamar 1 1
+zooplancton 1 thon 1 1
+zooplancton 1 crevette 1 1
+phytoplancton 1 zooplancton 1 1

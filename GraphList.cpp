@@ -64,12 +64,13 @@ void GraphList::SupprimerSommet()
         {
             while(valide == false)
             {
-            cout<<"choisissez le sommet que vous voulez supprimer"<<endl;
-            cin>>sommetsuppr;
-            for(unsigned int j = 0; j<m_graphes[i].Getsommets().size(); j++)
+                cout<<"choisissez le sommet que vous voulez supprimer"<<endl;
+                cin>>sommetsuppr;
+                for(unsigned int j = 0; j<m_graphes[i].Getsommets().size(); j++)
                 {
 
-                if(sommetsuppr == m_graphes[i].Getsommets()[j].Getnom()) valide = true;
+                    if(sommetsuppr == m_graphes[i].Getsommets()[j].Getnom())
+                        valide = true;
                 }
             }
             m_graphes[i].SupprimerSommet(sommetsuppr);
