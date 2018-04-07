@@ -239,12 +239,13 @@
 1522869057 source:c:\users\ghias\desktop\projetecologique\sommet.cpp
 	"Sommet.h"
 
-1522946804 source:c:\users\matth\desktop\projetstheoriedesgraphes\graph.cpp
+1523106226 source:c:\users\matth\desktop\projetstheoriedesgraphes\graph.cpp
 	"graph.h"
 	<queue>
 	"fstream"
+	<algorithm>
 
-1522944797 c:\users\matth\desktop\projetstheoriedesgraphes\graph.h
+1523033691 c:\users\matth\desktop\projetstheoriedesgraphes\graph.h
 	<iostream>
 	<map>
 	<vector>
@@ -273,7 +274,7 @@
 	<algorithm>
 	<allegro.h>
 
-1522946995 source:c:\users\matth\desktop\projetstheoriedesgraphes\graphlist.cpp
+1523022883 source:c:\users\matth\desktop\projetstheoriedesgraphes\graphlist.cpp
 	"GraphList.h"
 
 1522942454 c:\users\matth\desktop\projetstheoriedesgraphes\graphlist.h
@@ -318,7 +319,7 @@
 1522942454 source:c:\users\matth\desktop\projetstheoriedesgraphes\grman\widget.cpp
 	"widget.h"
 
-1522947056 source:c:\users\matth\desktop\projetstheoriedesgraphes\main.cpp
+1523106303 source:c:\users\matth\desktop\projetstheoriedesgraphes\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"GraphList.h"

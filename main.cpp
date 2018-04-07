@@ -6,7 +6,7 @@
 
 int main()
 {
-/*
+
     /// A appeler en 1er avant d'instancier des objets graphiques etc...
     grman::init();
     /// Le nom du répertoire où se trouvent les images à charger
@@ -21,26 +21,15 @@ int main()
     /// ( contrairement à des frameworks plus avancés )
     while ( !key[KEY_ESC] )
     {
+
         /// Il faut appeler les méthodes d'update des objets qui comportent des widgets
         g.update();
 
         /// Mise à jour générale (clavier/souris/buffer etc...)
         grman::mettre_a_jour();
     }
-*/
+
     grman::fermer_allegro();
-
-      GraphList* test = new GraphList;
-        test->Setmatriceajd();
-        test->Getgraphes().front().AfficherMatriceAdj();
-        //test->SupprimerSommet();
-        test->Setmatriceajd();
-        test->Getgraphes().front().AfficherMatriceAdj();
-        test->SauvegarderFichier();
-
-        test->Setforteconnexite();
-        test->Getgraphes()[0].AfficherForteConnexite();
-
     return 0;
 }
 END_OF_MAIN();

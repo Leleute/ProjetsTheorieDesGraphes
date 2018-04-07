@@ -156,7 +156,6 @@ private :
     bool m_actif;
     std::vector<int> m_couleur;
     int m_indice;
-
     bool m_marque;
 
     ///   BITMAP* m_image; // Pas besoin ?
@@ -251,7 +250,7 @@ private :
     /// indice du sommet de départ de l'arc
     int m_from;
 
-    /// indice du sommet d'arrivée de l'arc
+    /// indice du sommet d'arrivée de l'astd::cout<<"yo"<<std::endl;rc
     int m_to;
 
     /// un exemple de donnée associée à l'arc, on peut en ajouter d'autres...
@@ -305,6 +304,7 @@ public:
     void Setindice(int val){m_indice = val; }
     void Sets1(Vertex* val){m_s1 = *val;}
     void Sets2(Vertex* val){m_s2 = *val;}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 };
@@ -370,6 +370,8 @@ private :
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public:
+        void sommetKConnexite(int k);
+
 
     /// Les constructeurs sont à compléter selon vos besoin...
     /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
@@ -408,16 +410,20 @@ public:
     void MiseEnPlaceMatriceAdj(std::vector<int> test);
     void Initialisation();
     void SupprimerSommet(std::string sommet);
+    void SupprimerArete(int arete);
+    void SupprimerAretes(std::vector<int> aretesuppr);
+    int BFSSuppressionArete(int indice1, int indice2);
+    void KconnexiteArete();
 
-        void SupprimerArete(int arete);
-        int BFSSuppression(int indice1, int indice2);
 
-        bool IsConnexe();
+    void SupprimerSommets(std::vector<std::string> sommetsuppr);
+    int BFSSuppressionSommet(int indice1, int indice2);
+    void KconnexiteSommet();
 
-        void KconnexiteArete();
 
-        void MapVertex();
-        void MapEdge();
+    bool IsConnexe();
+    void MapVertex();
+    void MapEdge();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface

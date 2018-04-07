@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <queue>
 #include "fstream"
+#include <algorithm>
 /***************************************************
                     VERTEX
 ****************************************************/
@@ -364,7 +365,7 @@ void Graph::Initialisation()
     ///On mets les sommets des aretes a egalite de ces derniers
     for(unsigned int i = 0; i<m_aretes.size(); i ++)
     {
-        for(unsigned int j = 0; j<m_ordre; j++)
+        for(unsigned int j = 0; j<m_sommets.size(); j++)
         {
             if(m_aretes[i].Gets1().Getnom() == m_sommets[j].Getnom())
                 m_aretes[i].Sets1(&m_sommets[j]);
@@ -374,10 +375,10 @@ void Graph::Initialisation()
     }
     ///On mets a jour l'indice des aretes
 
-        for(unsigned int i = 0; i<m_aretes.size(); i++)
-        {
-            m_aretes[i].Setindice(i);
-        }
+    for(unsigned int i = 0; i<m_aretes.size(); i++)
+    {
+        m_aretes[i].Setindice(i);
+    }
 
 
     this->MapEdge();
@@ -564,7 +565,6 @@ void Graph::SauvegarderGraphe()
 
 void Graph::SupprimerSommet(std::string sommetsupr)
 {
-    std::cout<<"sqfsqfsqfsqfsqfsqfsqf"<<std::endl;
     std::vector<Edge> newArete;
     std::vector<Vertex> newSommet;
     ///Pour les sommets
@@ -577,6 +577,7 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     ///On met a jour les sommets
     m_sommets = newSommet;
 
+    ///Mise a jour des aretes
     for(unsigned int i = 0; i<m_aretes.size(); i++)
     {
         if(m_aretes[i].Gets1().Getnom() != sommetsupr && m_aretes[i].Gets2().Getnom() != sommetsupr)
@@ -586,7 +587,51 @@ void Graph::SupprimerSommet(std::string sommetsupr)
     m_aretes = newArete;
 
     ///On reinitiallise le graphe
-    Initialisation();
+    //Initialisation();
+}
+
+void Graph::SupprimerSommets(std::vector<std::string> sommetsuppr)
+{
+    ///On parcourt le vecteur
+    ///Pour chaque, on regarde si il est dans la liste, si il n'y est pas on l'ajoute
+    std::vector<Edge> newArete;
+    std::vector<Vertex> newSommet;
+    bool aSupprimer = false;
+    bool aGarder = false;
+    ///Pour les sommets
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        aSupprimer = false;
+        ///On ajoute toutes les aretes sauf celle a supprimer
+        for(unsigned int j = 0; j<sommetsuppr.size(); j++)
+        {
+            if(sommetsuppr[j] == m_sommets[i].Getnom())
+            {
+                aSupprimer = true;
+            }
+        }
+        if(aSupprimer == false)
+            newSommet.push_back(m_sommets[i]);
+    }
+    ///On met a jour les aretes
+    m_sommets = newSommet;
+    for(unsigned int i = 0; i<m_aretes.size(); i++)
+    {
+        for(unsigned int j = 0; j<sommetsuppr.size(); j++)
+        {
+            aGarder = true;
+            if(m_aretes[i].Gets1().Getnom() == sommetsuppr[j] || m_aretes[i].Gets2().Getnom() == sommetsuppr[j])
+            {
+                aGarder = false;
+            }
+        }
+        if(aGarder == true)
+            newArete.push_back(m_aretes[i]);
+    }
+    m_aretes = newArete;
+
+    ///On reinitiallise le graphe
+    //Initialisation();
 }
 
 
@@ -598,14 +643,44 @@ void Graph::SupprimerArete(int aretesuppr)
     {
         ///On ajoute toutes les aretes sauf celui a supprimer
         if(aretesuppr != m_aretes[i].Getindice())
-        newArete.push_back(m_aretes[i]);
+            newArete.push_back(m_aretes[i]);
     }
     ///On met a jour les sommets
 
     m_aretes = newArete;
 
     ///On reinitiallise le graphe
-    Initialisation();
+    //Initialisation();
+}
+
+
+void Graph::SupprimerAretes(std::vector<int> aretesuppr)
+{
+    ///On parcourt le vecteur
+    ///Pour chaque, on regarde si il est dans la liste, si il n'y est pas on l'ajoute
+    std::vector<Edge> newArete;
+    bool aSupprimer = false;
+    ///Pour les sommets
+    for(unsigned int i = 0; i<m_aretes.size(); i++)
+    {
+        aSupprimer = false;
+        ///On ajoute toutes les aretes sauf celle a supprimer
+        for(unsigned int j = 0; j<aretesuppr.size(); j++)
+        {
+            if(aretesuppr[j] == m_aretes[i].Getindice())
+            {
+                aSupprimer = true;
+            }
+        }
+        if(aSupprimer == false)
+            newArete.push_back(m_aretes[i]);
+    }
+    ///On met a jour les sommets
+
+    m_aretes = newArete;
+
+    ///On reinitiallise le graphe
+    //Initialisation();
 }
 
 
@@ -649,76 +724,301 @@ bool Graph::IsConnexe()
     }
     if(nombreSommetMarque == m_sommets.size())
     {
-        return false;
+        return true;
     }
 
     if(nombreSommetMarque != m_sommets.size())
     {
-        return true;
+        return false;
     }
 }
 
 void Graph::KconnexiteArete()
 {
     Initialisation();
-    bool cheminValide = true;
     int nombreAreteThisRound;
-    int nombreAreteSuppr = m_aretes.size();
+    int kAreteConnexite = m_aretes.size();
     ///On copie le graphe pour pouvoir le modifier sans affecter tout l'affichage, etc ...
     Graph copie = *this;
     for(unsigned int i = 0; i<m_sommets.size(); i++)
     {
         for(unsigned int j = 0; j<m_sommets.size(); j++)
         {
-            //while(cheminValide == true)
-            //{
-                nombreAreteThisRound = BFSSuppression(i, j);
-            //}
+            std::cout<<"tour numero "<<j + i*m_sommets.size()<<std::endl;
+            if(i != j)
+            {
+                nombreAreteThisRound = BFSSuppressionArete(j, i);
+                if(nombreAreteThisRound < kAreteConnexite)
+                    kAreteConnexite = nombreAreteThisRound;
+            }
+            *this = copie;
 
         }
     }
+    std::cout<<"Le graphe est "<<kAreteConnexite<<" K-Arete-Connexe"<<std::endl;
 
 }
 
-int Graph::BFSSuppression(int indice1, int indice2)
+void Graph::sommetKConnexite(int k)
 {
-    Initialisation();
-    std::queue<int> file;
-    int sommetselec;
-    int sommetsuivant;
-    ///On demarre le BFS au sommet d'incide 1;
-    m_sommets[indice1].Setmarque(true);
-    file.push(indice1);
-    while(!file.empty())
+    int boucle = 0;
+    bool actif = true;
+    bool sommetDistinct = false;
+    std::vector<int> compteur;
+    std::vector<std::string> nomEffacer;
+    for(unsigned int i = 0; i<k; i++)
     {
-        sommetselec = file.front();
-        file.pop();
-        for(unsigned int j=0; j< m_aretes.size(); j++)
+        compteur.push_back(0);
+    }
+    Graph copie = *this;
+    while(actif == true)
+    {
+        sommetDistinct = true;
+        nomEffacer.clear();
+        ///On regarde si deux indice on le meme ordre, dans ce cas on ne fera pas les interactions
+        for(unsigned int i = 0; i<k; i++)
         {
-            if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets1().Getnom())
-                sommetsuivant = m_aretes[j].Gets2().Getindice();
-            if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets2().Getnom())
-                sommetsuivant = m_aretes[j].Gets1().Getindice();
-            if(!m_sommets[sommetsuivant].Getmarque())
+            for(unsigned int j = 0; j<k; j++)
             {
-                m_sommets[sommetsuivant].Setmarque(true);
-                file.push(sommetsuivant);
-                m_sommets[sommetsuivant].Setprede(sommetselec);
+                if(i != j && compteur[i] == compteur[j]) sommetDistinct = false;
+            }
+        }
+        ///On supprime les k sommets a supprimer
+        if(sommetDistinct == true)
+        {
+            for(unsigned int i = 0; i<k; i++)
+            {
+                nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
+            SupprimerSommet(m_sommets[compteur[i]].Getnom());
+            }
+            if(IsConnexe() == false)
+            {
+                for(unsigned int i = 0; i<nomEffacer.size();i++)
+                {
+                    std::cout<<nomEffacer[i]<<std::endl;
+                }
+            }
+        }
+        *this = copie;
+
+        Initialisation();
+        ///On augmente le cran du compteur
+        compteur[k-1] = compteur[k-1] + 1;
+
+        for(unsigned int i = 0; i<k; i++)
+        {
+            ///Si on a attent le rang max
+            if(compteur[k-i-1] == m_sommets.size())
+            {
+                if(i == k-1) actif = false;
+                if(i < m_sommets.size() - 1 )
+                {
+
+                    compteur[k-i-1] = 0;
+                    compteur[k-i- 2] = compteur[k-i-2]+1;
+                }
             }
         }
     }
-    sommetselec = indice2;
+    *this = copie;
+}
+
+void Graph::KconnexiteSommet()
+{
+    Initialisation();
+    int nombreSommetThisRound;
+    int kSommetConnexite = m_sommets.size();
+    ///On copie le graphe pour pouvoir le modifier sans affecter tout l'affichage, etc ...
+    Graph copie = *this;
     for(unsigned int i = 0; i<m_sommets.size(); i++)
     {
-        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Getindice()<<std::endl;
+        for(unsigned int j = 0; j<m_sommets.size(); j++)
+        {
+            std::cout<<"tour numero "<<j + i*m_sommets.size()<<std::endl;
+            if(i != j)
+            {
+                nombreSommetThisRound = BFSSuppressionSommet(j, i);
+                if(nombreSommetThisRound < kSommetConnexite)
+                    kSommetConnexite = nombreSommetThisRound;
+                std::cout<<nombreSommetThisRound<<std::endl;
+            }
+            *this = copie;
+
+        }
     }
+    std::cout<<"Le graphe est "<<kSommetConnexite<<" K-Sommet-Connexe"<<std::endl;
+    sommetKConnexite(kSommetConnexite);
+
+}
+
+int Graph::BFSSuppressionArete(int indice1, int indice2)
+{
+
+    int nbchemin = 0;
+    std::queue<int> file;
+    std::vector<int> areteSupr;
+    int sommetselec;
+    int sommetsuivant;
+    bool reussite;
     do
     {
-        std::cout<<m_sommets[sommetselec].Getprede()<<std::endl;
-        sommetselec = m_sommets[sommetselec].Getprede();
+        Initialisation();
+        ///On demarre le BFS au sommet d'incide 1;
+        m_sommets[indice1].Setmarque(true);
+        file.push(indice1);
+        while(!file.empty())
+        {
+            sommetselec = file.front();
+            file.pop();
+            for(unsigned int j=0; j< m_aretes.size(); j++)
+            {
+                reussite = false;
+                if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets1().Getnom())
+                {
+                    sommetsuivant = m_aretes[j].Gets2().Getindice();
+                    reussite = true;
+                }
+                if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets2().Getnom())
+                {
+                    sommetsuivant = m_aretes[j].Gets1().Getindice();
+                    reussite = true;
+                }
+                if(reussite == true)
+                {
+                    if(!m_sommets[sommetsuivant].Getmarque())
+                    {
+                        m_sommets[sommetsuivant].Setprede(sommetselec);
+                        m_sommets[sommetsuivant].Setmarque(true);
+                        file.push(sommetsuivant);
+                        if(sommetsuivant == indice2)
+                        {
+                            std::cout<<m_aretes[j].Gets1().Getnom()<<" "<<m_aretes[j].Gets2().Getnom()<<std::endl;
+                            std::cout<<"reussite"<<std::endl;
+                        }
 
-    }while(sommetselec != 0);
-    std::cout<<std::endl;
+                    }
+                }
+            }
+        }
+        if(m_sommets[indice2].Getmarque() == true)
+        {
+            sommetselec = indice2;
+            areteSupr.clear();
+            while(sommetselec != indice1)
+            {
+                for(unsigned int j = 0; j<m_aretes.size(); j++)
+                {
+                    if((m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getprede() )|| (m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getprede()))
+                    {
+                        sommetselec = m_sommets[sommetselec].Getprede();
+                        areteSupr.push_back(j);
+                    }
+                }
+            }
+            std::sort(areteSupr.begin(),areteSupr.end());
+            SupprimerAretes(areteSupr);
+            nbchemin = nbchemin + 1;
+        }
+    }
+    while(m_sommets[indice2].Getprede() != m_sommets[indice2].Getindice());
+    return nbchemin;
+}
+
+
+int Graph::BFSSuppressionSommet(int indice1, int indice2)
+{
+    bool test = true;
+    bool connexe = true;
+    int nbchemin = 0;
+    ///On retire l'arete reliant directement ces 2 sommets (si elle existe)
+    for(unsigned int i = 0; i<m_aretes.size(); i++)
+    {
+        if((m_aretes[i].Gets1().Getindice() == indice1 && m_aretes[i].Gets2().Getindice() == indice2) || (m_aretes[i].Gets1().Getindice() == indice2 && m_aretes[i].Gets2().Getindice() == indice1))
+        {
+            test = false;
+            nbchemin = m_sommets.size() - 1;
+        }
+    }
+    std::queue<int> file;
+    std::vector<std::string> SommetSupr;
+    int sommetselec;
+    int sommetsuivant;
+    bool reussite;
+    if (test == true)
+    {
+        do
+        {
+            ///On demarre le BFS au sommet d'incide 1;
+            Initialisation();
+            m_sommets[indice1].Setmarque(true);
+            file.push(indice1);
+            std::cout<<m_sommets[indice1].Getnom()<<" "<<m_sommets[indice2].Getnom()<<std::endl;
+            while(!file.empty())
+            {
+                sommetselec = file.front();
+                file.pop();
+                for(unsigned int j=0; j< m_aretes.size(); j++)
+                {
+                    reussite = false;
+                    if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets1().Getnom())
+                    {
+                        sommetsuivant = m_aretes[j].Gets2().Getindice();
+                        reussite = true;
+                    }
+                    if(m_sommets[sommetselec].Getnom() == m_aretes[j].Gets2().Getnom())
+                    {
+                        sommetsuivant = m_aretes[j].Gets1().Getindice();
+                        reussite = true;
+                    }
+                    if(reussite == true)
+                    {
+                        if(!m_sommets[sommetsuivant].Getmarque())
+                        {
+                            m_sommets[sommetsuivant].Setprede(sommetselec);
+                            m_sommets[sommetsuivant].Setmarque(true);
+                            file.push(sommetsuivant);
+                        }
+                    }
+                }
+            }
+
+            if(m_sommets[indice2].Getmarque() == true)
+            {
+                sommetselec = indice2;
+                SommetSupr.clear();
+                while(sommetselec != indice1)
+                {
+                    for(unsigned int j = 0; j<m_aretes.size(); j++)
+                    {
+                        if((m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getprede() )|| (m_aretes[j].Gets2().Getindice() == m_sommets[sommetselec].Getindice() && m_aretes[j].Gets1().Getindice() == m_sommets[sommetselec].Getprede()))
+                        {
+                            if(sommetselec != indice1 && sommetselec != indice2)
+                            SommetSupr.push_back(m_sommets[sommetselec].Getnom());
+                            sommetselec = m_sommets[sommetselec].Getprede();
+
+                        }
+                    }
+
+                }
+                ///On sauvegarde les sommets d'indice 1 et 2
+                std::string save1 = m_sommets[indice1].Getnom();
+                std::string save2 = m_sommets[indice2].Getnom();
+                SupprimerSommets(SommetSupr);
+                for(unsigned int i = 0; i<m_sommets.size(); i++)
+                {
+                    if(m_sommets[i].Getnom() == save1)
+                        indice1 = i;
+                    if(m_sommets[i].Getnom() == save2)
+                        indice2 = i;
+                }
+                nbchemin = nbchemin + 1;
+            }
+
+        }
+        while(m_sommets[indice2].Getmarque() == true);
+    }
+    return nbchemin;
+
 }
 
 
@@ -742,354 +1042,6 @@ void Graph::MapEdge()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*Graph::Graph(std::string nomfichier)
-{
-std::ifstream fp { (nomfichier+".txt").c_str() };
-    std::string s1, s2;
-    float poids, taille1, taille2;
-    bool valide1 = false;
-    bool valide2 = false;
-    if(fp)
-    {
-        m_nom = nomfichier;
-        fp>>m_ordre;
-        fp>>m_nbaretes;
-        for(unsigned int i = 0; i<m_nbaretes; i++)
-        {
-            fp>>s1;
-            fp>>taille1;
-            fp>>s2;
-            fp>>taille2;
-            fp>>poids;
-
-            for(unsigned int j = 0; j < m_sommets.size(); j++)
-            {
-                if(s1 == m_sommets[j].Getnom())
-                {
-                    valide1 = true;
-                }
-                if(s2 == m_sommets[j].Getnom())
-                {
-                    valide2 = true;
-                }
-            }
-            if(valide1 == false)
-            {
-                Vertex s(s1, taille1);
-                m_sommets.push_back(s);
-            }
-            if(valide2 == false)
-            {
-                Vertex s(s2, taille2);
-                m_sommets.push_back(s);
-            }
-            valide1 = false;
-            valide2 = false;
-
-            Edge arete(s1, taille1, s2,taille2, poids) ;
-            m_aretes.push_back(arete);
-        }
-        Initialisation();
-    }
-}
-
-void Graph::Initialisation()
-{
-    ///On met a jour le nombre d'arete et de sommet
-    m_nbaretes = m_aretes.size();
-    m_ordre = m_sommets.size();
-    ///On initialise les indices des sommeet
-    for(unsigned int i = 0; i<m_ordre; i++)
-    {
-        m_sommets[i].Setindice(i);
-        m_sommets[i].Setmarque(false);
-        m_sommets[i].Setdegre(0);
-        m_sommets[i].Setprede(i);
-
-    }
-    ///On mets a jour le degré des sommets
-    for(unsigned int i = 0; i<m_sommets.size(); i++)
-    {
-        for(unsigned int j = 0; j<m_aretes.size(); j++)
-        {
-            if(m_sommets[i].Getnom() == m_aretes[j].Gets1().Getnom() || m_sommets[i].Getnom() == m_aretes[j].Gets2().Getnom())
-                m_sommets[i].Setdegre(m_sommets[i].Getdegre() + 1);
-        }
-    }
-    ///On mets les sommets des aretes a egalite de ces derniers
-    for(unsigned int i = 0; i<m_aretes.size(); i ++)
-    {
-        for(unsigned int j = 0; j<m_ordre; j++)
-        {
-            if(m_aretes[i].Gets1().Getnom() == m_sommets[j].Getnom())
-                m_aretes[i].Sets1(&m_sommets[j]);
-            if(m_aretes[i].Gets2().Getnom() == m_sommets[j].Getnom())
-                m_aretes[i].Sets2(&m_sommets[j]);
-        }
-    }
-    ///On mets a jour l'indice des aretes
-
-        for(unsigned int i = 0; i<m_aretes.size(); i++)
-        {
-            m_aretes[i].Setindice(i);
-        }
-
-
-    this->MapEdge();
-    this->MapVertex();
-}
-
-///A revoir
-void Graph::Setmatriceadja()
-{
-    ///On reinitialise la matrice
-    while(m_matriceadja.size() != 0)
-    {
-        m_matriceadja.pop_back();
-    }
-    std::cout<<"ordre : "<<m_ordre<<std::endl;
-    for(unsigned int i= 0; i<m_ordre*m_ordre; i++)
-    {
-
-        m_matriceadja.push_back(0);
-    }
-
-    for(unsigned int i = 0; i<m_ordre; i++)
-    {
-        for(unsigned int j = 0; j<m_ordre; j++)
-        {
-            for(unsigned int k = 0; k<m_aretes.size(); k++)
-            {
-                if(m_sommets[i].Getnom() == m_aretes[k].Gets1().Getnom() && m_sommets[j].Getnom() == m_aretes[k].Gets2().Getnom())
-                {
-                    m_matriceadja[(i + j*m_ordre)] = m_aretes[k].Getpoids();
-                }
-            }
-
-        }
-    }
-}
-
-
-void Graph::AfficherMatriceAdj()
-{
-    for(unsigned int i = 0 ; i<m_sommets.size(); i++)
-    {
-        std::cout<<m_sommets[i].Getnom()<<std::endl;
-    }
-    for(unsigned int i= 0; i<m_ordre; i++)
-    {
-        for(unsigned int j = 0; j<m_ordre; j++)
-        {
-            std::cout<<m_matriceadja[i + j * m_ordre]<<" ";
-        }
-        std::cout<<std::endl;
-    }
-
-    for(unsigned int i = 0; i<m_ordre; i++)
-    {
-        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Getindice()<<std::endl;
-    }
-}
-
-void Graph::ForteConnexite()
-{
-    std::queue<int> file;
-    ///On initialise les indices des sommets
-    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
-    for(unsigned int i = 0; i<m_ordre; i++)
-    {
-        ///Composantes fortement connexte partant de x (via vecteur d'arrete)
-
-        ///On initialise le marquage a faux
-        Initialisation();
-        ///On ajoute le sommets de debut
-        file.push(i);
-        ///On le marque
-        m_sommets[i].Setmarque(true);
-        ///On crée le vecteur qui va recuperer les arretes utilisés
-        std::vector<Vertex> compoconnexe;
-        while(file.size() != 0)
-        {
-            for(unsigned int j = 0; j<m_aretes.size(); j++)
-            {
-                ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
-                {
-                    ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                    file.push(m_aretes[j].Gets2().Getindice());
-                    ///On le marque
-                    m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
-                }
-            }
-            file.pop();
-        }
-        std::cout<<m_sommets[i].Getnom()<<std::endl;
-        for(unsigned int j = 0; j<m_ordre; j++)
-        {
-            if(m_sommets[j].Getmarque() == true)
-            {
-                ///On recuperer les sommets de la compo connexe dans le sens positif
-                std::cout<<m_sommets[j].Getnom()<<std::endl;
-                compoconnexe.push_back(m_sommets[j]);
-            }
-        }
-        std::cout<<std::endl<<std::endl;
-
-        ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
-
-        ///On initialise le marquage a faux
-        Initialisation();
-        ///On ajoute le sommets de debut
-        file.push(i);
-        ///On le marque
-        m_sommets[i].Setmarque(true);
-        ///On crée le vecteur qui va recuperer les arretes utilisés
-        std::vector<Vertex> compoconnexeinverse;
-        while(file.size() != 0)
-        {
-            for(unsigned int j = 0; j<m_aretes.size(); j++)
-            {
-                ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
-                {
-                    ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                    file.push(m_aretes[j].Gets1().Getindice());
-                    ///On le marque
-                    m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
-                }
-            }
-            file.pop();
-        }
-        std::cout<<m_sommets[i].Getnom()<<std::endl;
-        for(unsigned int j = 0; j<m_ordre; j++)
-        {
-            if(m_sommets[j].Getmarque() == true)
-            {
-                ///On recuperer les sommets de la compo connexe dans le sens positif
-                std::cout<<m_sommets[j].Getnom()<<std::endl;
-                compoconnexeinverse.push_back(m_sommets[j]);
-            }
-        }
-
-        std::cout<<std::endl<<std::endl;
-        for(unsigned int j = 0; j<compoconnexe.size(); j++)
-        {
-            for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
-            {
-                if(compoconnexe[j].Getnom()==compoconnexeinverse[k].Getnom())
-                {
-                    m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
-                }
-            }
-        }
-    }
-}
-
-void Graph::AfficherForteConnexite()
-{
-    for(unsigned int i = 0; i<m_ordre; i++)
-    {
-        for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
-        {
-            std::cout<<m_sommets[i].Getcouleur()[j]<<std::endl;
-        }
-        std::cout<<std::endl;
-    }
-}
-
-void Graph::SauvegarderGraphe()
-{
-    std::ofstream fp {(m_nom+".txt").c_str(), std::ios::out};
-    if (fp)
-    {
-        fp<<m_ordre<<std::endl;
-        fp<<m_nbaretes<<std::endl;
-        for(unsigned int i = 0; i<m_nbaretes; i++)
-        {
-            fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Getpoids()<<std::endl;
-        }
-    }
-    else
-    {
-       std:: cout<<"Erreur"<<std::endl;
-    }
-}
-
-void Graph::SupprimerSommet(std::string sommetsupr)
-{
-    bool suprvalide;
-    std::vector<Edge> newArete;
-    std::vector<Vertex> newSommet;
-    std::cout<<"Veuillez nommer le sommet a supprimer"<<std::endl;
-    std::cin>>sommetsupr;
-    for(unsigned int i = 0; i<m_sommets.size(); i++)
-    {
-        if(sommetsupr == m_sommets[i].Getnom())
-            suprvalide = true;
-    }
-    if(suprvalide == true)
-    {
-        ///Pour les sommets
-        for(unsigned int i = 0; i<m_sommets.size(); i++)
-        {
-            ///On ajoute tous les sommets sauf celui a supprimer
-            if(sommetsupr != m_sommets[i].Getnom())
-                newSommet.push_back(m_sommets[i]);
-        }
-        ///On met a jour les sommets
-        m_sommets = newSommet;
-
-        for(unsigned int i = 0; i<m_aretes.size(); i++)
-        {
-            if(m_aretes[i].Gets1().Getnom() != sommetsupr && m_aretes[i].Gets2().Getnom() != sommetsupr)
-                newArete.push_back(m_aretes[i]);
-        }
-
-        m_aretes = newArete;
-
-        ///On reinitiallise le graphe
-        Initialisation();
-    }
-}
-
-void Graph::MapVertex()
-{
-    m_vertex.clear();
-    for(int i = 0; i<m_sommets.size(); i++)
-    {
-        m_vertex[i] = m_sommets[i];
-    }
-}
-
-void Graph::MapEdge()
-{
-    m_vertex.clear();
-    for(int i = 0; i<m_aretes.size(); i++)
-    {
-        m_edge[i] = m_aretes[i];
-    }
-}*/
 
 
 
