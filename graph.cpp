@@ -342,7 +342,6 @@ Graph::Graph(std::string nomfichier)
 
 void Graph::Initialisation()
 {
-    std::cout<<m_nbaretes<<std::endl;
     ///On met a jour le nombre d'arete et de sommet
     m_nbaretes = m_aretes.size();
     m_ordre = m_sommets.size();
@@ -497,99 +496,7 @@ void Graph::AfficherMatriceAdj()
     for(unsigned int i= 0; i<m_ordre; i++)
     {
         for(unsigned int j = 0; j<m_ordre; j++)
-        {void Graph::ForteConnexite()
-{
-    std::queue<int> file;
-    std::vector<Vertex> vecForteConnexite;
-    ///On initialise les indices des sommets
-    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
-    for(unsigned int i = 0; i<m_sommets.size(); i++)
-    {
-        if(m_sommets[i].Getcouleur().size() == 0)
         {
-            ///Composantes fortement connexte partant de x (via vecteur d'arrete)
-
-            ///On initialise le marquage a faux
-            Initialisation();
-            ///On ajoute le sommets de debut
-            file.push(i);
-            ///On le marque
-            m_sommets[i].Setmarque(true);
-            ///On crée le vecteur qui va recuperer les arretes utilisés
-            std::vector<Vertex> compoconnexe;
-            while(file.size() != 0)
-            {
-                for(unsigned int j = 0; j<m_aretes.size(); j++)
-                {
-                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
-                    {
-                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                        file.push(m_aretes[j].Gets2().Getindice());
-                        ///On le marque
-                        m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
-                    }
-                }
-                file.pop();
-            }
-            for(unsigned int j = 0; j<m_ordre; j++)
-            {
-                if(m_sommets[j].Getmarque() == true)
-                {
-                    ///On recuperer les sommets de la compo connexe dans le sens positif
-                    compoconnexe.push_back(m_sommets[j]);
-                }
-            }
-            std::cout<<std::endl<<std::endl;
-
-            ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
-
-            ///On initialise le marquage a faux
-            Initialisation();
-            ///On ajoute le sommets de debut
-            file.push(i);
-            ///On le marque
-            m_sommets[i].Setmarque(true);
-            ///On crée le vecteur qui va recuperer les arretes utilisés
-            std::vector<Vertex> compoconnexeinverse;
-            while(file.size() != 0)
-            {
-                for(unsigned int j = 0; j<m_aretes.size(); j++)
-                {
-                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
-                    {
-                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                        file.push(m_aretes[j].Gets1().Getindice());
-                        ///On le marque
-                        m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
-                    }
-                }
-                file.pop();
-            }
-            for(unsigned int j = 0; j<m_ordre; j++)
-            {
-                if(m_sommets[j].Getmarque() == true)
-                {
-                    ///On recuperer les sommets de la compo connexe dans le sens inverse
-                    compoconnexeinverse.push_back(m_sommets[j]);
-                }
-            }
-
-            ///On regarde les si les points d'intersection entre la composante connexe inverse et celle dans le sens positif
-            for(unsigned int j = 0; j<compoconnexe.size(); j++)
-            {
-                for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
-                {
-                    if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
-                    {
-                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
-                    }
-                }
-            }
-        }
-    }
-}
             std::cout<<m_matriceadja[i + j * m_ordre]<<" ";
         }
         std::cout<<std::endl;
@@ -601,7 +508,7 @@ void Graph::AfficherMatriceAdj()
     }
 }
 
-void Graph::ForteConnexite()void Graph::ForteConnexite()
+void Graph::ForteConnexite()
 {
     std::queue<int> file;
     std::vector<Vertex> vecForteConnexite;
@@ -679,99 +586,6 @@ void Graph::ForteConnexite()void Graph::ForteConnexite()
                     compoconnexeinverse.push_back(m_sommets[j]);
                 }
             }
-
-            ///On regarde les si les points d'intersection entre la composante connexe inverse et celle dans le sens positif
-            for(unsigned int j = 0; j<compoconnexe.size(); j++)
-            {
-                for(unsigned int k = 0; k<compoconnexeinverse.size(); k++)
-                {
-                    if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
-                    {
-                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
-                    }
-                }
-            }
-        }
-    }
-}
-{
-    std::queue<int> file;
-    std::vector<Vertex> vecForteConnexite;
-    ///On initialise les indices des sommets
-    ///On fait la boucle pour les comporantes fortement connexe pour les sommets 1 a 1
-    for(unsigned int i = 0; i<m_sommets.size(); i++)
-    {
-        if(m_sommets[i].Getcouleur().size() == 0)
-        {
-            ///Composantes fortement connexte partant de x (via vecteur d'arrete)
-
-            ///On initialise le marquage a faux
-            Initialisation();
-            ///On ajoute le sommets de debut
-            file.push(i);
-            ///On le marque
-            m_sommets[i].Setmarque(true);
-            ///On crée le vecteur qui va recuperer les arretes utilisés
-            std::vector<Vertex> compoconnexe;
-            while(file.size() != 0)
-            {
-                for(unsigned int j = 0; j<m_aretes.size(); j++)
-                {
-                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets1().Getnom() && m_sommets[m_aretes[j].Gets2().Getindice()].Getmarque() == false)
-                    {
-                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                        file.push(m_aretes[j].Gets2().Getindice());
-                        ///On le marque
-                        m_sommets[m_aretes[j].Gets2().Getindice()].Setmarque(true);
-                    }
-                }
-                file.pop();
-            }
-            for(unsigned int j = 0; j<m_ordre; j++)
-            {
-                if(m_sommets[j].Getmarque() == true)
-                {
-                    ///On recuperer les sommets de la compo connexe dans le sens positif
-                    compoconnexe.push_back(m_sommets[j]);
-                }
-            }
-            std::cout<<std::endl<<std::endl;
-
-            ///Composantes fortement connexte en sens inverse partant de x (via vecteur d'arrete)
-
-            ///On initialise le marquage a faux
-            Initialisation();
-            ///On ajoute le sommets de debut
-            file.push(i);
-            ///On le marque
-            m_sommets[i].Setmarque(true);
-            ///On crée le vecteur qui va recuperer les arretes utilisés
-            std::vector<Vertex> compoconnexeinverse;
-            while(file.size() != 0)
-            {
-                for(unsigned int j = 0; j<m_aretes.size(); j++)
-                {
-                    ///Si le sommets cible et le sommet 1 d'une arete on le meme nom
-                    if(m_sommets[file.front()].Getnom() == m_aretes[j].Gets2().Getnom() && m_sommets[m_aretes[j].Gets1().Getindice()].Getmarque() == false)
-                    {
-                        ///Si le sommets 2 de l'arete n'est pas marquer, on le marque et on l'ajoute a la file
-                        file.push(m_aretes[j].Gets1().Getindice());
-                        ///On le marque
-                        m_sommets[m_aretes[j].Gets1().Getindice()].Setmarque(true);
-                    }
-                }
-                file.pop();
-            }
-            for(unsigned int j = 0; j<m_ordre; j++)
-            {
-                if(m_sommets[j].Getmarque() == true)
-                {
-                    ///On recuperer les sommets de la compo connexe dans le sens inverse
-                    compoconnexeinverse.push_back(m_sommets[j]);
-                }
-            }
-
             ///On regarde les si les points d'intersection entre la composante connexe inverse et celle dans le sens positif
             for(unsigned int j = 0; j<compoconnexe.size(); j++)
             {

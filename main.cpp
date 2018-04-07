@@ -10,8 +10,8 @@ int main()
 
     /// Un exemple de graphe
     GraphList g;
-    g.AjouterSommet();
-    g.SauvegarderFichier();
+    g.Setforteconnexite();
+    g.Getgraphes().front().AfficherForteConnexite();
 
 
 }
