@@ -111,22 +111,30 @@ void GraphList::Setforteconnexite()
 
 void GraphList::AffichageGraphe()
 {
-    for(int i=0; i<m_listnoms.size(); i++)
+    for(int i=0; i<m_graphes.size(); i++)
     {
-        cout<<"Graphe numero "<<i+1<<endl;
-        cout<<this->Getgraphes()[i].Getnom()<<endl;
-        for(int j = 0; j<m_graphes[i].Getaretes().size(); j++)
+        if(m_graphes[i].Getactif()==true)
         {
-            cout<<m_graphes[i].Getaretes()[j].Gets1().Getnom()<<endl;
-            cout<<m_graphes[i].Getaretes()[j].Gets1().Gettaille()<<endl;
-
-            cout<<m_graphes[i].Getaretes()[j].Gets2().Getnom()<<endl;
-            cout<<m_graphes[i].Getaretes()[j].Gets2().Gettaille()<<endl;
-            cout<<m_graphes[i].Getaretes()[j].Getpoids()<<endl;
-            cout<<endl;
+        for(int j = 0; j<m_graphes[i].Getsommets().size(); j++)
+        {
+            cout<<m_graphes[i].Getsommets()[j].Getnom()<<" a une population de "<<m_graphes[i].Getsommets()[j].Gettaille()<<endl;
         }
-        cout<<m_graphes[i].Getsommets().size()<<endl<<endl;
+        cout<<endl;
+        }
+
     }
+}
+
+void GraphList::ModifierTaille()
+{
+    for(int i=0; i<m_graphes.size(); i++)
+    {
+        if(m_graphes[i].Getactif()==true)
+        {
+            m_graphes[i].ModifierTailleSommet();
+        }
+    }
+
 }
 
 void GraphList::SauvegarderFichier()

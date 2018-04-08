@@ -34,14 +34,9 @@ int cpt = 0;
     }
     std::string nomGraph;
     Graph gr;
-
-//g.animaux();
-//g.niveau1();
-//g.niveau2();
 bool menu = false;
 int menuChoix = 10;
 bool lancementboucle = true;
-//cout<<1/0<<endl;
 
     while ( !key[KEY_ESC] )
     {
@@ -59,10 +54,6 @@ bool lancementboucle = true;
         }
         while(menu == true)
         {
-            for(unsigned int i = 0; i<g.Getgraphes().size(); i++)
-                    {
-                        if(g.Getgraphes()[i].Getactif() == true) std::cout<<g.Getgraphes()[i].Getsommets().size()<<" "<<g.Getgraphes()[i].Getaretes().size()<<endl;
-                    }
 
             std::cout<<"Voici les actions possible : "<<std::endl;
             std::cout<<"1 : Changer de graph actif"<<std::endl;
@@ -147,6 +138,8 @@ bool lancementboucle = true;
                     break;
 
                 case 8 :
+                    g.ModifierTaille();
+                    g.AffichageGraphe();
                     break;
 
                 case 9 :
@@ -160,12 +153,8 @@ bool lancementboucle = true;
         {
 
               cpt=0;
-              g.croissance();
-              /*for(int i=0; i<g.Getgraphes()[0].Getsommets().size(); i++)
-              {
-                    cout<<g.Getgraphes()[0].Getsommets()[i].Getnom()<<" "<<g.Getgraphes()[0].Getsommets()[i].Gettaille()<<" "<<"yo"<<endl;
-              }
-              cout<<endl;*/
+            g.croissance();
+            g.AffichageGraphe();
 
         }
         gr.update();

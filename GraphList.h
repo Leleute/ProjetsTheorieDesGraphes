@@ -36,6 +36,7 @@ public:
     void AjouterSommet();
     void SetGrapheActif(int i){ m_graphes[i].Setactif(true); }
     void SetGrapheNonActif(int i){ m_graphes[i].Setactif(false); }
+    void ModifierTaille();
 
         void croissance();
 protected:

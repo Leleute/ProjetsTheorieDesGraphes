@@ -314,16 +314,33 @@ void Graph::croissance()
         {
             reduction = reduction + seFaitManger[j].Gets2().Gettaille()*seFaitManger[j].Getpoids();
         }
-        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<m_sommets[i].getRythme()<<std::endl;
         if(k != 0 ) ponderation = m_sommets[i].Gettaille() + m_sommets[i].getRythme()*m_sommets[i].Gettaille()*(1 - m_sommets[i].Gettaille()/k) - reduction;
-        if(k == 0) ponderation = 0;
+        if(k <= 0) ponderation = 0;
         copie[i].Settaille(m_sommets[i].Gettaille() + (ponderation - m_sommets[i].Gettaille())/10);
-        if(ponderation == 0)copie[i].Settaille(0);
-        if(m_sommets[i].Gettaille() < 0) m_sommets[i].Settaille(0);
-        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<ponderation<<std::endl;
+        if(ponderation == 0) copie[i].Settaille(0);
+        if(copie[i].Gettaille() < 0) copie[i].Settaille(0);
     }
     m_sommets = copie;
-    std::cout<<std::endl;
+}
+
+void Graph::ModifierTailleSommet()
+{
+    std::string sommetModif;
+    int newTaille;
+    std::cout<<"Veuillez rentrer le nom du sommet a modifier : "<<std::endl;
+    std::cin>>sommetModif;
+    for(unsigned int i = 0; i<m_sommets.size(); i++)
+    {
+        if(m_sommets[i].Getnom() == sommetModif)
+        {
+            std::cout<<"Quelle est la nouvelle taille de population ?"<<std::endl;
+            std::cin>>newTaille;
+            m_sommets[i].Settaille(newTaille);
+            std::cout<<m_sommets[i].Gettaille()<<std::endl;
+        }
+    }
+    Initialisation();
+
 }
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
@@ -482,10 +499,6 @@ void Graph::Initialisation()
     {
         m_aretes[i].Setindice(i);
     }
-
-
-    this->MapEdge();
-    this->MapVertex();
 }
 
 void Graph::AjouterSommet(Graph grapheSave)

@@ -18,7 +18,7 @@ limace 10 1.3 tortue 32 1.5 0.4
 mouche 38 2.2 grenouille 10 1.4 0.33
 libellule 20 1.2 grenouille 10 1.4 0.4
 grenouille 10 1.4 martinPecheur 11 1.3 0.5
-grenouille 10 1.4 serpent 9 1.2 0.5
+grenouille 10 1.4 serpent 9 1.2 1
 decompositeurMarin 78 1.2 algue 85 1.2 0.5
 decompositeurMarin 78 1.2 herbeMarine 83 1.3 0.5
 tortue 32 1.5 decompositeurMarin 78 1.2 0.25

@@ -1,11 +1,11 @@
 7
 9
-calamar 0 1.3 cachalot 0 1.4 0.5
-thon 0 1.5 cachalot 0 1.4 0.5
-thon 0 1.5 crevette 0 1.2 0.5
-crevette 0 1.2 calamar 0 1.3 1
-zooplancton 0 1.1 thon 0 1.5 1
-zooplancton 0 1.1 crevette 0 1.2 0.5
-phytoplancton 0 1.2 zooplancton 0 1.1 0.5
-phytoplancton 0 1.2 krill 0 1.4 1
-krill 0 1.4 zooplancton 0 1.1 0.5
+calamar 60 1.3 cachalot 40 1.4 0.5
+thon 80 1.5 cachalot 40 1.4 0.5
+thon 80 1.5 crevette 100 1.2 0.5
+crevette 100 1.2 calamar 60 1.3 1
+zooplancton 90 1.1 thon 80 1.5 1
+zooplancton 90 1.1 crevette 100 1.2 0.5
+phytoplancton 70 1.2 zooplancton 90 1.1 0.5
+phytoplancton 70 1.2 krill 100 1.4 1
+krill 100 1.4 zooplancton 90 1.1 0.5
