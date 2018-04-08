@@ -1,9 +1,11 @@
-6
 7
-calamar 1 cachalot 1 1
-thon 1 cachalot 1 1
-thon 1 crevette 1 1
-crevette 1 calamar 1 1
-zooplancton 1 thon 1 1
-zooplancton 1 crevette 1 1
-phytoplancton 1 zooplancton 1 1
+9
+calamar 0 1.3 cachalot 0 1.4 0.5
+thon 0 1.5 cachalot 0 1.4 0.5
+thon 0 1.5 crevette 0 1.2 0.5
+crevette 0 1.2 calamar 0 1.3 1
+zooplancton 0 1.1 thon 0 1.5 1
+zooplancton 0 1.1 crevette 0 1.2 0.5
+phytoplancton 0 1.2 zooplancton 0 1.1 0.5
+phytoplancton 0 1.2 krill 0 1.4 1
+krill 0 1.4 zooplancton 0 1.1 0.5
