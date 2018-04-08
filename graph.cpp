@@ -275,7 +275,7 @@ void Graph::niveau2()
 void Graph::croissance()
 {
     Initialisation();
-
+    std::vector<Vertex> copie = m_sommets;
     for(int i = 0; i<m_sommets.size(); i++)
     {
         std::vector<Edge> seFaitManger;
@@ -305,11 +305,13 @@ void Graph::croissance()
         }
         std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<m_sommets[i].getRythme()<<std::endl;
         if(k != 0 ) ponderation = m_sommets[i].Gettaille() + m_sommets[i].getRythme()*m_sommets[i].Gettaille()*(1 - m_sommets[i].Gettaille()/k) - reduction;
-        if(k == 0) ponderation = m_sommets[i].Gettaille()*m_sommets[i].getRythme() - reduction;
-        m_sommets[i].Settaille(m_sommets[i].Gettaille() + (ponderation - m_sommets[i].Gettaille())/10);
+        if(k == 0) ponderation = 0;
+        copie[i].Settaille(m_sommets[i].Gettaille() + (ponderation - m_sommets[i].Gettaille())/10);
+        if(ponderation == 0)copie[i].Settaille(0);
         if(m_sommets[i].Gettaille() < 0) m_sommets[i].Settaille(0);
         std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<ponderation<<std::endl;
     }
+    m_sommets = copie;
     std::cout<<std::endl;
 }
 
