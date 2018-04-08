@@ -163,10 +163,12 @@ private :
     int m_degre;
     int m_predecesseur;
 
-    float m_rythme = 2;
+    float m_rythme = 1;
     float m_K = 100;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public:
+//      void changerK(std::vector<Edge> arete);
+    //void changerTaille(std::vector<Edge>) arete;
 
     /// Les constructeurs sont à compléter selon vos besoin...
     /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
@@ -180,8 +182,8 @@ public:
     void post_update();
 //////////////////////////////////////////////////////////////////////////On peut très bien mettre deux constructeurs surchargés dans une classe////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Vertex(){}; ///
-    Vertex(std::string nom, float taille, VertexInterface *interface=nullptr) :
-        m_nom(nom), m_actif(true), m_taille(taille),m_interface(interface) {} ///
+    Vertex(std::string nom, float taille, float rythme,VertexInterface *interface=nullptr) :
+        m_nom(nom), m_actif(true), m_taille(taille), m_rythme(rythme) ,m_interface(interface) {} ///
     virtual ~Vertex() {};
     std::string Getnom()
     {
@@ -361,10 +363,10 @@ public:
     void post_update();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Edge(std::string s1, float taille1,std::string s2,float taille2, float val)
+    Edge(std::string s1, float taille1, float rythme1, std::string s2,float taille2, float rythme2, float val)
     {
-        Vertex sommet1(s1,taille1);
-        Vertex sommet2(s2, taille2);
+        Vertex sommet1(s1,taille1, rythme1);
+        Vertex sommet2(s2, taille2, rythme2);
         m_s1=sommet1;
         m_s2=sommet2;
         m_poids=val;
@@ -405,10 +407,6 @@ public:
     {
         m_s2 = *val;
     }
-
-  void changerK();
-    void changerTaille();
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 };
 

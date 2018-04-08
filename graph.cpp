@@ -135,16 +135,6 @@ void Edge::post_update()
 }
 
 
-    void Edge::changerK()
-    {
-          m_s2.setK(m_poids * m_s1.Gettaille());
-    }
-
-void Edge::changerTaille()
-{
-     m_s2.Settaille(m_s2.Gettaille() - m_s1.getK());
-}
-
 /***************************************************
                     GRAPH
 ****************************************************/
@@ -284,22 +274,43 @@ void Graph::niveau2()
 
 void Graph::croissance()
 {
-      for(int i = 0; i<m_sommets.size(); i++)
-      {
-            if(m_sommets[i].Gettaille() > 0)
+    Initialisation();
+
+    for(int i = 0; i<m_sommets.size(); i++)
+    {
+        std::vector<Edge> seFaitManger;
+        std::vector<Edge> mange;
+        int k = 0;
+        int reduction=0;
+        int ponderation;
+        for(unsigned int j = 0; j<m_aretes.size(); j++)
+        {
+            if(m_sommets[i].Getnom() == m_aretes[j].Gets1().Getnom())
             {
-                  m_sommets[i].Settaille(m_sommets[i].Gettaille() + m_sommets[i].getRythme()*m_sommets[i].Gettaille()*(1 - m_sommets[i].Gettaille()/m_sommets[i].getK()) /** - la somme des K **/);
+                seFaitManger.push_back(m_aretes[j]);
             }
-            else if(m_sommets[i].Gettaille() <= 0)
+            if(m_sommets[i].Getnom() == m_aretes[j].Gets2().Getnom())
             {
-                  m_sommets[i].Settaille(0);
+                mange.push_back(m_aretes[j]);
             }
-      }
-      for(int i = 0; i<m_aretes.size();i++)
-      {
-            m_aretes[i].changerK();
-            m_aretes[i].changerTaille();
-      }
+        }
+
+        for(unsigned int j = 0; j<mange.size(); j++)
+        {
+            k = k + mange[j].Gets1().Gettaille()*mange[j].Getpoids();
+        }
+        for(unsigned int j = 0; j<seFaitManger.size(); j++)
+        {
+            reduction = reduction + seFaitManger[j].Gets2().Gettaille()*seFaitManger[j].Getpoids();
+        }
+        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<m_sommets[i].getRythme()<<std::endl;
+        if(k != 0 ) ponderation = m_sommets[i].Gettaille() + m_sommets[i].getRythme()*m_sommets[i].Gettaille()*(1 - m_sommets[i].Gettaille()/k) - reduction;
+        if(k == 0) ponderation = m_sommets[i].Gettaille()*m_sommets[i].getRythme() - reduction;
+        m_sommets[i].Settaille(m_sommets[i].Gettaille() + (ponderation - m_sommets[i].Gettaille())/10);
+        if(m_sommets[i].Gettaille() < 0) m_sommets[i].Settaille(0);
+        std::cout<<m_sommets[i].Getnom()<<" "<<m_sommets[i].Gettaille()<<" "<<k<<" "<<reduction<<" "<<ponderation<<std::endl;
+    }
+    std::cout<<std::endl;
 }
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
@@ -369,6 +380,8 @@ Graph::Graph(std::string nomfichier)
     float poids, taille1, taille2;
     bool valide1 = false;
     bool valide2 = false;
+    float rythme1;
+    float rythme2;
     if(fp)
     {
         m_nom = nomfichier;
@@ -378,8 +391,10 @@ Graph::Graph(std::string nomfichier)
         {
             fp>>s1;
             fp>>taille1;
+            fp>>rythme1;
             fp>>s2;
             fp>>taille2;
+            fp>>rythme2;
             fp>>poids;
 
             for(unsigned int j = 0; j < m_sommets.size(); j++)
@@ -395,18 +410,18 @@ Graph::Graph(std::string nomfichier)
             }
             if(valide1 == false)
             {
-                Vertex s(s1, taille1);
+                Vertex s(s1, taille1, rythme1);
                 m_sommets.push_back(s);
             }
             if(valide2 == false)
             {
-                Vertex s(s2, taille2);
+                Vertex s(s2, taille2, rythme2);
                 m_sommets.push_back(s);
             }
             valide1 = false;
             valide2 = false;
 
-            Edge arete(s1, taille1, s2,taille2, poids) ;
+            Edge arete(s1, taille1, rythme1, s2,taille2,rythme2, poids) ;
             m_aretes.push_back(arete);
         }
         Initialisation();
@@ -463,7 +478,7 @@ void Graph::Initialisation()
 void Graph::AjouterSommet(Graph grapheSave)
 {
     bool newSommet;
-    std::vector<std::string> listNewSommet;
+    std::vector<Vertex> listNewSommet;
     std::string sommetAjout;
     int tailleNewSommet;
     std::cout<<"Voici la liste des sommets possible a ajouter : "<<std::endl;
@@ -477,7 +492,7 @@ void Graph::AjouterSommet(Graph grapheSave)
         }
         if(newSommet == true)
         {
-            listNewSommet.push_back(grapheSave.Getsommets()[i].Getnom());
+            listNewSommet.push_back(grapheSave.Getsommets()[i]);
             std::cout<<grapheSave.Getsommets()[i].Getnom()<<" ,"<<std::endl;
         }
     }
@@ -489,20 +504,19 @@ void Graph::AjouterSommet(Graph grapheSave)
     for(unsigned int i = 0; i<listNewSommet.size(); i++)
     {
         ///On ajoute le sommet et les aretes
-        if(sommetAjout == listNewSommet[i])
+        if(sommetAjout == listNewSommet[i].Getnom())
         {
             for(unsigned int j = 0; j<grapheSave.Getaretes().size(); j++)
             {
-                if(grapheSave.Getaretes()[j].Gets1().Getnom() == listNewSommet[i] || grapheSave.Getaretes()[j].Gets2().Getnom() == listNewSommet[i])
+                if(grapheSave.Getaretes()[j].Gets1().Getnom() == listNewSommet[i].Getnom() || grapheSave.Getaretes()[j].Gets2().Getnom() == listNewSommet[i].Getnom())
                 {
-                    Edge newEdgeCrea(grapheSave.Getaretes()[j].Gets1().Getnom(),grapheSave.Getaretes()[j].Gets1().Gettaille(),grapheSave.Getaretes()[j].Gets2().Getnom(),grapheSave.Getaretes()[j].Gets2().Gettaille(),grapheSave.Getaretes()[j].Getpoids());
+                    Edge newEdgeCrea(grapheSave.Getaretes()[j].Gets1().Getnom(),grapheSave.Getaretes()[j].Gets1().Gettaille(),grapheSave.Getaretes()[j].Gets1().getRythme(),grapheSave.Getaretes()[j].Gets2().Getnom(),grapheSave.Getaretes()[j].Gets2().Gettaille(),grapheSave.Getaretes()[j].Gets2().getRythme(),grapheSave.Getaretes()[j].Getpoids());
                     newArete.push_back(newEdgeCrea);
                 }
             }
         }
     }
     bool aRajouter;
-    std::cout<<"Test"<<std::endl;
     for(unsigned int i = 0; i<newArete.size(); i++)
     {
         aRajouter = false;
@@ -520,16 +534,15 @@ void Graph::AjouterSommet(Graph grapheSave)
     for(unsigned int i = 0; i<listNewSommet.size(); i++)
     {
         ///On ajoute le sommet et les aretes
-        if(sommetAjout == listNewSommet[i])
+        if(sommetAjout == listNewSommet[i].Getnom())
         {
             std::cout<<"Veuillez rentrer l'ordre du nouveau sommet"<<std::endl;
             std::cin>>tailleNewSommet;
-            Vertex newSommetCrea(sommetAjout,tailleNewSommet);
+            Vertex newSommetCrea(sommetAjout,tailleNewSommet, listNewSommet[i].getRythme());
             m_sommets.push_back(newSommetCrea);
         }
     }
     Initialisation();
-    std::cout<<m_nbaretes<<std::endl;
 }
 
 
@@ -589,9 +602,9 @@ void Graph::AfficherMatriceAdj()
 void Graph::ForteConnexite()
 {
     for(unsigned int k = 0; k<m_sommets.size(); k++)
-                {
-                    m_sommets[k].CleanColor();
-                }
+    {
+        m_sommets[k].CleanColor();
+    }
     std::queue<int> file;
     std::vector<Vertex> vecForteConnexite;
     ///On initialise les indices des sommets
@@ -691,7 +704,8 @@ void Graph::AfficherForteConnexite()
     {
         for(unsigned int j = 0; j<m_sommets[i].Getcouleur().size(); j++)
         {
-            if(m_sommets[i].Getcouleur()[j] >= nbcolor ) nbcolor=m_sommets[i].Getcouleur()[j] + 1;
+            if(m_sommets[i].Getcouleur()[j] >= nbcolor )
+                nbcolor=m_sommets[i].Getcouleur()[j] + 1;
         }
 
     }
@@ -703,7 +717,8 @@ void Graph::AfficherForteConnexite()
         {
             for(unsigned int k = 0; k<m_sommets[j].Getcouleur().size(); k++)
             {
-                if(m_sommets[j].Getcouleur()[k] == i) std::cout<<m_sommets[j].Getnom()<<std::endl;
+                if(m_sommets[j].Getcouleur()[k] == i)
+                    std::cout<<m_sommets[j].Getnom()<<std::endl;
             }
         }
         std::cout<<std::endl;
@@ -719,7 +734,7 @@ void Graph::SauvegarderGraphe()
         fp<<m_aretes.size()<<std::endl;
         for(unsigned int i = 0; i<m_nbaretes; i++)
         {
-            fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Getpoids()<<std::endl;
+            fp<<m_aretes[i].Gets1().Getnom()<<" "<<m_aretes[i].Gets1().Gettaille()<<" "<<m_aretes[i].Gets1().getRythme()<<" "<<m_aretes[i].Gets2().Getnom()<<" "<<m_aretes[i].Gets2().Gettaille()<<" "<<m_aretes[i].Gets2().getRythme()<<" "<<m_aretes[i].Getpoids()<<std::endl;
         }
     }
     else
@@ -761,7 +776,8 @@ void Graph::SupprimerSommet(std::string sommetsupr)
                 sommetExiste = true;
             }
         }
-        if(sommetExiste == false) SupprimerSommet(Getsommets()[i].Getnom());
+        if(sommetExiste == false)
+            SupprimerSommet(Getsommets()[i].Getnom());
     }
 }
 

@@ -1,22 +1,21 @@
 12
 19
-algue 1 crevette 1 1
-algue 1 carpe 1 1
-algue 1 limace 1 1
-herbeMarine 1 crevette 1 1
-herbeMarine 1 carpe 1 1
-herbeMarine 1 mouche 1 1
-herbeMarine 1 limace 1 1
-herbeMarine 1 tortue 1 1
-crevette 1 truite 1 1
-carpe 1 truite 1 1
-carpe 1 martinPecheur 1 1
-truite 1 martinPecheur 1 1
-mouche 1 libellule 1 1
-mouche 1 grenouille 1 1
-mouche 1 tortue 1 1
-limace 1 tortue 1 1
-libellule 1 grenouille 1 1
-grenouille 1 martinPecheur 1 1
-grenouille 1 serpent 1 1
-
+algue 100 3 crevette 10 2 0.50
+algue 100 3 carpe 30 2 0.50
+algue 100 3 limace 10 1.8 0.50
+herbeMarine 100 3 crevette 10 2 0.50
+herbeMarine 100 3 carpe 30 2 0.50
+herbeMarine 100 3 mouche 25 2.2 1
+herbeMarine 100 3 limace 10 1.8 0.50
+herbeMarine 100 3 tortue 30 1.5 0.30
+crevette 10 2 truite 10 1.8 0.60
+carpe 30 2 truite 10 1.8 0.40
+carpe 30 2 martinPecheur 15 1.3 0.40
+truite 10 1.8 martinPecheur 15 1.3 0.40
+mouche 25 2.2 libellule 50 2 1
+mouche 25 2.2 tortue 30 1.5 0.35
+limace 10 1.8 tortue 30 1.5 0.35
+mouche 25 2.2 grenouille 20 1.4 0.50
+libellule 50 2 grenouille 20 1.4 0.50
+grenouille 20 1.4 martinPecheur 15 1.3 0.20
+grenouille 20 1.4 serpent 30 1.2 1

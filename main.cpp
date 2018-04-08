@@ -14,9 +14,25 @@ bool reussite;
 int cpt = 0;
     /// Un exemple de graphe
     GraphList g;
-    g.Setforteconnexite();
-    g.Getgraphes().front().AfficherForteConnexite();
-                    std::string nomGraph;
+    for(unsigned int i = 0; i<g.Getgraphes().size(); i++)
+    {
+        if(g.Getgraphes()[i].Getactif()== true)
+        {
+        for(unsigned int j = 0; j<g.Getgraphes()[i].Getsommets().size(); j++)
+        {
+            cout<<g.Getgraphes()[i].Getsommets()[j].Getnom()<<" "<<g.Getgraphes()[i].Getsommets()[j].Gettaille()<<" "<<g.Getgraphes()[i].Getsommets()[j].getRythme()<<endl;
+        }
+        cout<<endl;
+
+        for(unsigned int j = 0; j<g.Getgraphes()[i].Getaretes().size(); j++)
+        {
+            cout<<g.Getgraphes()[i].Getaretes()[j].Gets1().Getnom()<<" "<<g.Getgraphes()[i].Getaretes()[j].Gets1().Gettaille()<<" "<<g.Getgraphes()[i].Getaretes()[j].Gets1().getRythme()<<endl;
+            cout<<g.Getgraphes()[i].Getaretes()[j].Gets2().Getnom()<<" "<<g.Getgraphes()[i].Getaretes()[j].Gets2().Gettaille()<<" "<<g.Getgraphes()[i].Getaretes()[j].Gets2().getRythme()<<endl;
+            cout<<g.Getgraphes()[i].Getaretes()[j].Getpoids()<<endl;
+        }
+        }
+    }
+    std::string nomGraph;
     Graph gr;
 
 //g.animaux();
@@ -25,6 +41,7 @@ int cpt = 0;
 bool menu = false;
 int menuChoix = 10;
 bool lancementboucle = true;
+//cout<<1/0<<endl;
 
     while ( !key[KEY_ESC] )
     {
@@ -144,10 +161,11 @@ bool lancementboucle = true;
 
               cpt=0;
               g.croissance();
-              for(int i=0; i<g.Getgraphes()[0].Getsommets().size(); i++)
+              /*for(int i=0; i<g.Getgraphes()[0].Getsommets().size(); i++)
               {
-                    cout<<g.Getgraphes()[0].Getsommets()[i].Gettaille()<<endl;
+                    cout<<g.Getgraphes()[0].Getsommets()[i].Getnom()<<" "<<g.Getgraphes()[0].Getsommets()[i].Gettaille()<<" "<<"yo"<<endl;
               }
+              cout<<endl;*/
 
         }
         gr.update();
@@ -155,7 +173,7 @@ bool lancementboucle = true;
 
         cpt++;
     }
-    //g.SauvegarderFichier();
+    g.SauvegarderFichier();
 
     grman::fermer_allegro();
       return 0;
