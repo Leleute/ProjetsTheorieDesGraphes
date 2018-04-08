@@ -1,40 +1,27 @@
 13
 25
-algue 100 1.2 crevette 50 1.1 0.33
-algue 100 1.2 carpe 50 1.2 0.33
-algue 100 1.2 limace 10 1.3 0.33
-herbeMarine 100 1.3 crevette 10 1.1 0.25
-herbeMarine 100 1.3 carpe 50 1.2 0.25
-herbeMarine 100 1.3 mouche 50 2.2 0.25
-herbeMarine 100 1.3 limace 10 1.3 0.25
-herbeMarine 100 1.3 tortue 30 1.5 0.25
-crevette 10 1.1 truite 30 1.1 0.4
-carpe 50 1.2 truite 30 1.1 0.5
-carpe 50 1.2 martinPecheur 10 1.3 0.5
-truite 30 1.1 martinPecheur 10 1.3 0.2
-mouche 50 2.2 libellule 20 1.2 0.33
-mouche 50 2.2 tortue 10 1.5 0.33
-limace 10 1.3 tortue 10 1.5 0.4
-mouche 50 1.2 grenouille 10 1.4 0.33
+algue 85 1.2 crevette 51 1.1 0.33
+algue 85 1.2 carpe 51 1.2 0.33
+algue 85 1.2 limace 10 1.3 0.33
+herbeMarine 83 1.3 crevette 51 1.1 0.25
+herbeMarine 83 1.3 carpe 51 1.2 0.25
+herbeMarine 83 1.3 mouche 38 2.2 0.25
+herbeMarine 83 1.3 limace 10 1.3 0.25
+herbeMarine 83 1.3 tortue 32 1.5 0.25
+crevette 51 1.1 truite 30 1.1 0.4
+carpe 51 1.2 truite 30 1.1 0.5
+carpe 51 1.2 martinPecheur 11 1.3 0.5
+truite 30 1.1 martinPecheur 11 1.3 0.2
+mouche 38 2.2 libellule 20 1.2 0.33
+mouche 38 2.2 tortue 32 1.5 0.33
+limace 10 1.3 tortue 32 1.5 0.4
+mouche 38 2.2 grenouille 10 1.4 0.33
 libellule 20 1.2 grenouille 10 1.4 0.4
-grenouille 10 1.4 martinPecheur 15 1.3 0.5
-grenouille 10 1.4 serpent 10 1.2 0.5
-decompositeurMarin 100 1.2 algue 100 1.2 0.5
-decompositeurMarin 100 1.2 herbeMarine 100 1.3 0.5 
-tortue 10 1.5 decompositeurMarin 100 1.2 0.25
-carpe 50 1.2 decompositeurMarin 100 1.2 0.25
-crevette 10 1.1 decompositeurMarin 100 1.2 0.25
-truite 30 1.1 decompositeurMarin 100 1.2 0.25
-
-algue 100 1.2
-crevette 50 2
-herbeMarine 100 1.3
-carpe 50 1.2
-truite 30 1.1
-mouche 50 1.2
-limace 10 1.3
-libellule 20 1.2
-grenouille 10 1.4
-serpent 10 1.2
-tortue 10 1.5
-martinPecheur 10 1.3
+grenouille 10 1.4 martinPecheur 11 1.3 0.5
+grenouille 10 1.4 serpent 9 1.2 0.5
+decompositeurMarin 78 1.2 algue 85 1.2 0.5
+decompositeurMarin 78 1.2 herbeMarine 83 1.3 0.5
+tortue 32 1.5 decompositeurMarin 78 1.2 0.25
+carpe 51 1.2 decompositeurMarin 78 1.2 0.25
+crevette 51 1.1 decompositeurMarin 78 1.2 0.25
+truite 30 1.1 decompositeurMarin 78 1.2 0.25

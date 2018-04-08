@@ -209,6 +209,7 @@ void Graph::animaux()
     add_interfaced_vertex(9,1.0f, 750,50,"martinPecheur.bmp");
     add_interfaced_vertex(10,1.0f, 750,300,"grenouille.bmp");
     add_interfaced_vertex(11,1.0f, 750,480,"serpent.bmp");
+    add_interfaced_vertex(12,1.0f, 120,280,"decompositeurMarin.bmp");
 
     add_interfaced_edge(0, 0, 2, 1);
     add_interfaced_edge(1, 0, 3, 1);
@@ -229,6 +230,12 @@ void Graph::animaux()
     add_interfaced_edge(16, 7, 10, 1);
     add_interfaced_edge(17, 10, 9, 1);
     add_interfaced_edge(18, 10, 11, 1);
+     add_interfaced_edge(19, 12, 0, 1);
+    add_interfaced_edge(20, 12, 1, 1);
+    add_interfaced_edge(21, 2, 12, 1);
+    add_interfaced_edge(22, 3, 12, 1);
+    add_interfaced_edge(23, 6, 12, 1);
+    add_interfaced_edge(24, 8, 12, 1);
 
 }
 
@@ -249,6 +256,7 @@ void Graph::niveau1()
     add_interfaced_edge(2, 2, 1, 1);
     add_interfaced_edge(3, 3, 2, 1);
     add_interfaced_edge(4, 4, 3, 1);
+    add_interfaced_edge(5, 2, 4, 1);
 }
 void Graph::niveau2()
 {
@@ -262,6 +270,7 @@ void Graph::niveau2()
     add_interfaced_vertex(3,1.0f, 400,420,"zooplancton.bmp");
     add_interfaced_vertex(4,1.0f, 680,480,"phytoplancton.bmp");
     add_interfaced_vertex(5,1.0f, 150,300,"thon.bmp");
+    add_interfaced_vertex(6,1.0f, 180,480,"krill.bmp");
 
     add_interfaced_edge(0, 1, 0, 1);
     add_interfaced_edge(1, 5, 0, 1);
@@ -270,6 +279,8 @@ void Graph::niveau2()
     add_interfaced_edge(4, 3, 5, 1);
     add_interfaced_edge(5, 2, 1, 1);
     add_interfaced_edge(6, 4, 3, 1);
+       add_interfaced_edge(7, 3, 6, 1);
+    add_interfaced_edge(8, 6, 4, 1);
 }
 
 void Graph::croissance()
