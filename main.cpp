@@ -62,9 +62,8 @@ bool lancementboucle = true;
             std::cout<<"4 : Ajouter un sommet"<<std::endl;
             std::cout<<"5 : Voir la K-Sommet-Connexite du graphe"<<std::endl;
             std::cout<<"6 : Voir la K-Arete-Connexite du graphe"<<std::endl;
-            std::cout<<"7 : Voir la Matrice d'adjacence"<<std::endl;
-            std::cout<<"8 : Modifier la population d'un sommet"<<std::endl;
-            std::cout<<"9 : Revenir au defilement Temporel"<<std::endl;
+            std::cout<<"7 : Modifier la population d'un sommet"<<std::endl;
+            std::cout<<"8 : Revenir au defilement Temporel"<<std::endl;
             std::cin>>menuChoix;
                 switch(menuChoix)
                 {
@@ -129,20 +128,13 @@ bool lancementboucle = true;
                     }
                     break;
 
-                case 7 :
-                    g.Setmatriceajd();
-                    for(unsigned int i = 0; i<g.Getgraphes().size(); i++)
-                    {
-                        if(g.Getgraphes()[i].Getactif() == true) g.Getgraphes()[i].AfficherMatriceAdj();
-                    }
-                    break;
 
-                case 8 :
+                case 7 :
                     g.ModifierTaille();
                     g.AffichageGraphe();
                     break;
 
-                case 9 :
+                case 8 :
                     menu = false;
                     break;
                 }

@@ -984,6 +984,7 @@ void Graph::sommetKConnexite(int k)
 {
     int boucle = 0;
     bool actif = true;
+    bool reussite = false;
     bool sommetDistinct = false;
     std::vector<int> compteur;
     std::vector<std::string> nomEffacer;
@@ -995,6 +996,10 @@ void Graph::sommetKConnexite(int k)
     Graph copie = *this;
     while(actif == true)
     {
+        for(unsigned int i = 0; i<k; i++)
+        {
+            std::cout<<compteur[i]<<std::endl;
+        }
         sommetDistinct = true;
         nomEffacer.clear();
         ///On regarde si deux indice on le meme ordre, dans ce cas on ne fera pas les interactions
@@ -1009,12 +1014,15 @@ void Graph::sommetKConnexite(int k)
         ///On supprime les k sommets a supprimer
         if(sommetDistinct == true)
         {
+            reussite = false;
             for(unsigned int i = 0; i<k; i++)
             {
-                nomEffacer.push_back(m_sommets[compteur[i]].Getnom());
-                SupprimerSommet(m_sommets[compteur[i]].Getnom());
+                nomEffacer.push_back(copie.Getsommets()[compteur[i]].Getnom());
+                SupprimerSommet(copie.Getsommets()[compteur[i]].Getnom());
+
             }
-            if(IsConnexe() == false)
+            if(m_sommets.size() + k != copie.Getsommets().size()) reussite = true;
+            if(IsConnexe() == false || reussite == true)
             {
                 for(unsigned int i = 0; i<nomEffacer.size(); i++)
                 {
@@ -1037,20 +1045,18 @@ void Graph::sommetKConnexite(int k)
                     actif = false;
                 if(i < m_sommets.size() - 1 )
                 {
-
                     compteur[k-i-1] = 0;
                     compteur[k-i- 2] = compteur[k-i-2]+1;
                 }
             }
         }
-
     }
     int i = 0;
 
     std::cout<<"Les couples de sommets a retirer sont donc : "<<std::endl;
     while (i < sommetAretirer.size())
     {
-        for(unsigned j = 0; j < k; j++)
+        for(unsigned int j = 0; j < k; j++)
         {
             std::cout<<sommetAretirer[i + j]<<" ";
         }
@@ -1082,7 +1088,7 @@ void Graph::KconnexiteSommet()
         }
     }
     std::cout<<"Le graphe est "<<kSommetConnexite<<" K-Sommet-Connexe"<<std::endl;
-    sommetKConnexite(kSommetConnexite);
+    if(kSommetConnexite != 0) sommetKConnexite(kSommetConnexite);
 
 }
 

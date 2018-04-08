@@ -2,9 +2,34 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="GraphList.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="822" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="graph.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="37403" topLine="751" />
+		</Cursor>
+		<Folding>
+			<Collapse line="48" />
+			<Collapse line="62" />
+			<Collapse line="78" />
+			<Collapse line="114" />
+			<Collapse line="128" />
+			<Collapse line="759" />
+			<Collapse line="777" />
+			<Collapse line="815" />
+			<Collapse line="879" />
+			<Collapse line="909" />
+			<Collapse line="958" />
+			<Collapse line="983" />
+			<Collapse line="1069" />
+		</Folding>
+	</File>
 	<File name="GraphList.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3240" topLine="107" />
+			<Cursor1 position="3240" topLine="83" />
 		</Cursor>
 	</File>
 	<File name="graph.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -15,26 +40,9 @@
 			<Collapse line="88" />
 		</Folding>
 	</File>
-	<File name="graph.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="26624" topLine="672" />
-		</Cursor>
-		<Folding>
-			<Collapse line="48" />
-			<Collapse line="62" />
-			<Collapse line="78" />
-			<Collapse line="114" />
-			<Collapse line="128" />
-		</Folding>
-	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2614" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="GraphList.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="822" topLine="18" />
+			<Cursor1 position="5098" topLine="93" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
