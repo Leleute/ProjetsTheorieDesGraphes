@@ -740,10 +740,10 @@ void Graph::AfficherForteConnexite()
         }
 
     }
-    std::cout<<"il y a "<<nbcolor<<" composante(s) connexe(s) : "<<std::endl;
+    std::cout<<"il y a "<<nbcolor<<" composante(s) fortement connexe(s) : "<<std::endl;
     for(unsigned int i = 0; i<nbcolor; i++)
     {
-        std::cout<<"Composante Connexe numero "<<i<<std::endl;
+        std::cout<<"Composante Fortement Connexe numero "<<i<<std::endl;
         for(unsigned int j= 0; j<m_sommets.size(); j++)
         {
             for(unsigned int k = 0; k<m_sommets[j].Getcouleur().size(); k++)

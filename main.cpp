@@ -55,13 +55,13 @@ bool lancementboucle = true;
         while(menu == true)
         {
 
-            std::cout<<"Voici les actions possible : "<<std::endl;
-            std::cout<<"1 : Changer de graph actif"<<std::endl;
-            std::cout<<"2 : Voir les composantes fortement connexe du graph"<<std::endl;
+            std::cout<<"Voici les actions possibles : "<<std::endl;
+            std::cout<<"1 : Changer de graphe actif"<<std::endl;
+            std::cout<<"2 : Voir les composantes fortement connexes du graphe"<<std::endl;
             std::cout<<"3 : Supprimer un sommet"<<std::endl;
             std::cout<<"4 : Ajouter un sommet"<<std::endl;
-            std::cout<<"5 : Voir la K-Sommet-Connexite du graph"<<std::endl;
-            std::cout<<"6 : Voir la K-Arete-Connexite du graph"<<std::endl;
+            std::cout<<"5 : Voir la K-Sommet-Connexite du graphe"<<std::endl;
+            std::cout<<"6 : Voir la K-Arete-Connexite du graphe"<<std::endl;
             std::cout<<"7 : Voir la Matrice d'adjacence"<<std::endl;
             std::cout<<"8 : Modifier la population d'un sommet"<<std::endl;
             std::cout<<"9 : Revenir au defilement Temporel"<<std::endl;

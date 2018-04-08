@@ -755,3 +755,89 @@
 	"GraphList.h"
 	"graph.h"
 
+1523201480 source:c:\users\ghias\desktop\pojets4\graphlist.cpp
+	"GraphList.h"
+
+1523201480 c:\users\ghias\desktop\pojets4\graphlist.h
+	"Graphe.h"
+	"graph.h"
+
+1523201480 c:\users\ghias\desktop\pojets4\graphe.h
+	<vector>
+	<iostream>
+	"Arete.h"
+	"Graphe.h"
+	"fstream"
+
+1523201480 c:\users\ghias\desktop\pojets4\arete.h
+	<iostream>
+	<vector>
+	"Sommet.h"
+	<allegro.h>
+
+1523201480 c:\users\ghias\desktop\pojets4\sommet.h
+	<iostream>
+	<vector>
+	<allegro.h>
+
+1523201480 c:\users\ghias\desktop\pojets4\graph.h
+	<iostream>
+	<map>
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1523201480 c:\users\ghias\desktop\pojets4\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1523201480 c:\users\ghias\desktop\pojets4\grman\grman_couleurs.h
+
+1523201480 c:\users\ghias\desktop\pojets4\grman\coords.h
+	<cmath>
+
+1523201480 c:\users\ghias\desktop\pojets4\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1523201480 source:c:\users\ghias\desktop\pojets4\grman\coords.cpp
+	"coords.h"
+
+1523201480 source:c:\users\ghias\desktop\pojets4\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1523201480 source:c:\users\ghias\desktop\pojets4\grman\widget.cpp
+	"widget.h"
+
+1523201926 source:c:\users\ghias\desktop\pojets4\graph.cpp
+	"graph.h"
+	<queue>
+	"fstream"
+	<algorithm>
+
+1523201926 source:c:\users\ghias\desktop\pojets4\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"GraphList.h"
+	"graph.h"
+

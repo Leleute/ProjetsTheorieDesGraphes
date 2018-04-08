@@ -2,27 +2,22 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="GraphList.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3240" topLine="107" />
+		</Cursor>
+	</File>
 	<File name="graph.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="16365" topLine="95" />
 		</Cursor>
 		<Folding>
 			<Collapse line="88" />
-			<Collapse line="128" />
-			<Collapse line="287" />
-			<Collapse line="321" />
-			<Collapse line="420" />
-			<Collapse line="451" />
 		</Folding>
 	</File>
-	<File name="GraphList.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="graph.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3240" topLine="107" />
-		</Cursor>
-	</File>
-	<File name="graph.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11461" topLine="114" />
+			<Cursor1 position="26624" topLine="672" />
 		</Cursor>
 		<Folding>
 			<Collapse line="48" />
@@ -30,34 +25,11 @@
 			<Collapse line="78" />
 			<Collapse line="114" />
 			<Collapse line="128" />
-			<Collapse line="144" />
-			<Collapse line="166" />
-			<Collapse line="194" />
-			<Collapse line="242" />
-			<Collapse line="261" />
-			<Collapse line="326" />
-			<Collapse line="347" />
-			<Collapse line="369" />
-			<Collapse line="385" />
-			<Collapse line="406" />
-			<Collapse line="462" />
-			<Collapse line="504" />
-			<Collapse line="576" />
-			<Collapse line="607" />
-			<Collapse line="628" />
-			<Collapse line="731" />
-			<Collapse line="759" />
-			<Collapse line="777" />
-			<Collapse line="815" />
-			<Collapse line="860" />
-			<Collapse line="879" />
-			<Collapse line="909" />
-			<Collapse line="958" />
 		</Folding>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5642" topLine="136" />
+			<Cursor1 position="2614" topLine="48" />
 		</Cursor>
 	</File>
 	<File name="GraphList.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
