@@ -603,10 +603,13 @@ void Graph::AfficherMatriceAdj()
 
 void Graph::ForteConnexite()
 {
+    Initialisation();
+
     for(unsigned int k = 0; k<m_sommets.size(); k++)
     {
         m_sommets[k].CleanColor();
     }
+    int coloActuel = 0;
     std::queue<int> file;
     std::vector<Vertex> vecForteConnexite;
     ///On initialise les indices des sommets
@@ -615,6 +618,7 @@ void Graph::ForteConnexite()
     {
         if(m_sommets[i].Getcouleur().size() == 0)
         {
+    int nbCompoConnexe = 0;
             ///Composantes fortement connexte partant de x (via vecteur d'arrete)
 
             ///On initialise le marquage a faux
@@ -640,7 +644,7 @@ void Graph::ForteConnexite()
                 }
                 file.pop();
             }
-            for(unsigned int j = 0; j<m_ordre; j++)
+            for(unsigned int j = 0; j<m_sommets.size(); j++)
             {
                 if(m_sommets[j].Getmarque() == true)
                 {
@@ -689,12 +693,13 @@ void Graph::ForteConnexite()
                 {
                     if(compoconnexe[j].Getnom() == compoconnexeinverse[k].Getnom())
                     {
-
-                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(i);
-                        std::cout<<m_sommets[compoconnexe[j].Getindice()].Getcouleur().front()<<std::endl;
+                        nbCompoConnexe++;
+                        m_sommets[compoconnexe[j].Getindice()].Setcouleur(coloActuel);
                     }
                 }
             }
+
+           if(nbCompoConnexe != 0) coloActuel = coloActuel + 1;
         }
     }
 }
